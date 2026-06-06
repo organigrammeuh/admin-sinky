@@ -11,6 +11,7 @@ const dataProvider: DataProvider = {
 
     return {
       data: json,
+      total : json.length
     };
   },
 
