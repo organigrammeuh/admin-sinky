@@ -1,17 +1,27 @@
-import { DataProvider, DeleteManyParams, DeleteManyResult, fetchUtils, GetManyReferenceParams, GetManyReferenceResult, QueryFunctionContext, RaRecord, UpdateManyParams, UpdateManyResult } from "react-admin";
+import {
+  DataProvider,
+  DeleteManyParams,
+  DeleteManyResult,
+  fetchUtils,
+  GetManyReferenceParams,
+  GetManyReferenceResult,
+  QueryFunctionContext,
+  RaRecord,
+  UpdateManyParams,
+  UpdateManyResult,
+} from "react-admin";
 
 const apiUrl = import.meta.env.VITE_API_URL ?? "http://localhost:3000/api";
 const httpClient = fetchUtils.fetchJson;
 
 const dataProvider: DataProvider = {
-
   getList: async (resource, params) => {
     const url = `${apiUrl}/${resource}`;
     const { json } = await httpClient(url);
 
     return {
       data: json,
-      total : json.length
+      total: json.length,
     };
   },
 
@@ -49,16 +59,25 @@ const dataProvider: DataProvider = {
     });
     return { data: json };
   },
-  
-  getManyReference: function <RecordType extends RaRecord = any>(resource: string, params: GetManyReferenceParams & QueryFunctionContext): Promise<GetManyReferenceResult<RecordType>> {
+
+  getManyReference: function <RecordType extends RaRecord = any>(
+    resource: string,
+    params: GetManyReferenceParams & QueryFunctionContext,
+  ): Promise<GetManyReferenceResult<RecordType>> {
     throw new Error("Function not implemented.");
   },
-  updateMany: function <RecordType extends RaRecord = any>(resource: string, params: UpdateManyParams): Promise<UpdateManyResult<RecordType>> {
+  updateMany: function <RecordType extends RaRecord = any>(
+    resource: string,
+    params: UpdateManyParams,
+  ): Promise<UpdateManyResult<RecordType>> {
     throw new Error("Function not implemented.");
   },
-  deleteMany: function <RecordType extends RaRecord = any>(resource: string, params: DeleteManyParams<RecordType>): Promise<DeleteManyResult<RecordType>> {
+  deleteMany: function <RecordType extends RaRecord = any>(
+    resource: string,
+    params: DeleteManyParams<RecordType>,
+  ): Promise<DeleteManyResult<RecordType>> {
     throw new Error("Function not implemented.");
-  }
+  },
 };
 
 export default dataProvider;
