@@ -1,4 +1,4 @@
-import { DateField, Show, SimpleShowLayout, TextField } from "react-admin";
+import { DateField, DeleteButton, Show, SimpleShowLayout, TextField } from "react-admin";
 
 export const EventShow = () => {
   return (
@@ -10,6 +10,7 @@ export const EventShow = () => {
         <DateField source="startDate" />
         <DateField source="endDate" />
         <TextField source="location" />
+        <DeleteButton />
       </SimpleShowLayout>
     </Show>
   );

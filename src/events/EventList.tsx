@@ -1,4 +1,4 @@
-import { DataTable, DateField, List } from "react-admin";
+import { DataTable, DateField, DeleteButton, EditButton, List } from "react-admin";
 
 export const EventList = () => (
   <List >
@@ -12,6 +12,8 @@ export const EventList = () => (
         <DateField source="endDate" locales="en-US" />
       </DataTable.Col>
       <DataTable.Col source="location" />
+      <EditButton />
+      <DeleteButton />
     </DataTable>
   </List>
 );
