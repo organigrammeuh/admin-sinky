@@ -8,6 +8,7 @@ import { EventEdit } from "./events/EventEdit";
 import { SpeakerList } from "./speakers/SpeakerList";
 import { SpeakerShow } from "./speakers/SpeakerShow";
 import { SpeakerEdit } from "./speakers/SpeakerEdit";
+import { SpeakerCreate } from "./speakers/SpeakerCreate";
 
 export const App = () => (
   <Admin layout={Layout} dataProvider={dataProvider}>
@@ -20,6 +21,7 @@ export const App = () => (
     />
     <Resource
       name="speakers"
+      create={SpeakerCreate}
       list={SpeakerList}
       show={SpeakerShow}
       edit={SpeakerEdit}
