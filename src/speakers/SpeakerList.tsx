@@ -1,4 +1,3 @@
-import { Delete } from "@mui/icons-material"
 import { DataTable, DeleteButton, Edit, EditButton, List } from "react-admin"
 
 export const SpeakerList = () => (
