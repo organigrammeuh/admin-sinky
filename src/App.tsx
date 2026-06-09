@@ -7,6 +7,7 @@ import { EventCreate } from "./events/EventCreate";
 import { EventEdit } from "./events/EventEdit";
 import { SpeakerList } from "./speakers/SpeakerList";
 import { SpeakerShow } from "./speakers/SpeakerShow";
+import { SpeakerEdit } from "./speakers/SpeakerEdit";
 
 export const App = () => (
   <Admin layout={Layout} dataProvider={dataProvider}>
@@ -21,6 +22,7 @@ export const App = () => (
       name="speakers"
       list={SpeakerList}
       show={SpeakerShow}
+      edit={SpeakerEdit}
     />
   </Admin>
 );
