@@ -1,0 +1,15 @@
+import { DataTable, List } from "react-admin"
+
+export const SpeakerList = () => (
+    <List>
+        <DataTable rowClick="show">
+            <DataTable.Col source="id" />
+            <DataTable.Col source="fullName" />
+            <DataTable.Col source="bio" />
+            <DataTable.Col source="profilePicture" />
+            <DataTable.Col source="socialLinks" />
+            <DataTable.Col source="sessions" />
+        </DataTable>
+    </List>
+)
+
