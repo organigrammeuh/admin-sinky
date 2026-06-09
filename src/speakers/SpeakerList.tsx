@@ -6,8 +6,8 @@ export const SpeakerList = () => (
         <DataTable rowClick="show">
             <DataTable.Col source="id" />
             <DataTable.Col source="fullName" />
-            <DataTable.Col source="bio" />
-            <DataTable.Col source="profilePicture" />
+            {/* <DataTable.Col source="bio" /> */}
+            {/* <DataTable.Col source="profilePicture" /> */}
             <DataTable.Col source="socialLinks" />
             <DataTable.Col source="sessions" />
             <EditButton />
