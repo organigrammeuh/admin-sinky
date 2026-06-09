@@ -34,7 +34,7 @@ export const App = () => (
     name="sessions"
     // create={SessionCreate}
     list={SessionList}
-    // show={SessionShow}
+    show={SessionShow}
     // edit={SessionEdit}
      />
   </Admin>
