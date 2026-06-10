@@ -1,4 +1,4 @@
-import { Show, SimpleShowLayout, TextField } from "react-admin";
+import { ArrayField, Datagrid, Show, SimpleShowLayout, TextField } from "react-admin";
 
 export const SpeakerShow = () =>(
     <Show>
@@ -8,7 +8,14 @@ export const SpeakerShow = () =>(
             <TextField source="bio" />
             <TextField source="profilePicture" />
             <TextField source="socialLinks" />
-            <TextField source="sessions" />
+            <ArrayField source="sessions">
+                <Datagrid
+                    bulkActionButtons={false}
+                    rowClick={(id) => `/sessions/${id}/show`}
+                >
+                    <TextField source="title" />
+                </Datagrid>
+            </ArrayField>
         </SimpleShowLayout>
     </Show>
 )
