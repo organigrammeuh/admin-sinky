@@ -9,7 +9,7 @@ import { SpeakerList } from "./speakers/SpeakerList";
 import { SpeakerShow } from "./speakers/SpeakerShow";
 import { SpeakerEdit } from "./speakers/SpeakerEdit";
 import { SpeakerCreate } from "./speakers/SpeakerCreate";
-// import { SessionCreate } from "./sessions/SessionCreate";
+import { SessionCreate } from "./sessions/SessionCreate";
 import { SessionList } from "./sessions/SessionList";
 import { SessionShow } from "./sessions/SessionShow";
 import { SessionEdit } from "./sessions/SessionEdit";
@@ -32,7 +32,7 @@ export const App = () => (
     />
     <Resource 
     name="sessions"
-    // create={SessionCreate}
+    create={SessionCreate}
     list={SessionList}
     show={SessionShow}
     edit={SessionEdit}
