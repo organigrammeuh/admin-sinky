@@ -1,19 +1,29 @@
-import { DateTimeInput, Edit, minValue, NumberInput, ReferenceArrayInput, ReferenceInput, required, SelectArrayInput, SelectInput, SimpleForm, TextInput } from "react-admin";
+import { 
+    DateTimeInput, Edit, minValue, NumberInput, 
+    ReferenceArrayInput, ReferenceInput, required, 
+    SelectArrayInput, SelectInput, SimpleForm, TextInput 
+} from "react-admin";
+import { useSearchParams } from "react-router-dom";
 
-export const SessionEdit = () => (
-    <Edit>
-        <SimpleForm>
-            <TextInput source="title" validate={[required()]} />
-            <TextInput source="description" validate={[required()]} />
-            <DateTimeInput source="startTime" validate={[required()]} />
-            <DateTimeInput source="endTime" validate={[required()]} />
-            <ReferenceInput source="room" reference="rooms">
-                <SelectInput optionText="name" validate={[required()]} label="Room"/>
-            </ReferenceInput>
-            <NumberInput source="capacity" validate={[required(), minValue(1)]} />
-            <ReferenceArrayInput source="speakers" reference="speakers">
-                <SelectArrayInput optionText="fullName" label="Speakers"/>
-            </ReferenceArrayInput>
-        </SimpleForm>
-    </Edit>
-)
+export const SessionEdit = () => {
+    const [searchParams] = useSearchParams();
+    const eventId = searchParams.get("eventId");
+
+    return (
+        <Edit transform={(data) => ({ ...data, eventId })}>
+            <SimpleForm>
+                <TextInput source="title" validate={[required()]} />
+                <TextInput source="description" validate={[required()]} />
+                <DateTimeInput source="startTime" validate={[required()]} />
+                <DateTimeInput source="endTime" validate={[required()]} />
+                <ReferenceInput source="roomId" reference="rooms">
+                    <SelectInput optionText="name" validate={[required()]} label="Room" />
+                </ReferenceInput>
+                <NumberInput source="capacity" validate={[required(), minValue(1)]} />
+                <ReferenceArrayInput source="speakerIds" reference="speakers">
+                    <SelectArrayInput optionText="fullName" label="Speakers" />
+                </ReferenceArrayInput>
+            </SimpleForm>
+        </Edit>
+    );
+};
