@@ -16,12 +16,28 @@ const httpClient = fetchUtils.fetchJson;
 
 const dataProvider: DataProvider = {
   getList: async (resource, params) => {
-    const url = `${apiUrl}/${resource}`;
-    const { json } = await httpClient(url);
+    const { page, perPage } = params.pagination;
+    const { field, order } = params.sort;
+    
+    const query = {
+        sort: JSON.stringify([field, order]),
+        range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+        filter: JSON.stringify(params.filter),
+    };
+
+    const url = `${apiUrl}/${resource}?${new URLSearchParams(query)}`;
+    const { json, headers } = await httpClient(url);
+
+    if (!headers.has('content-range')) {
+        throw new Error('The Content-Range header is missing in the HTTP Response. The simple REST data provider expects responses for lists of resources to include this header. Please check the API.');
+    }
 
     return {
-      data: json,
-      total: json.length,
+        data: json,
+        total: parseInt(
+            headers.get('content-range')!.split('/').pop()!,
+            10
+        ),
     };
   },
 
