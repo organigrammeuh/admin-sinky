@@ -46,6 +46,13 @@ const dataProvider: DataProvider = {
   },
 
   update: async (resource, params) => {
+    if (resource === "speakers") {
+      const { json } = await httpClient(`${apiUrl}/${resource}/${params.id}`, {
+        method: "PUT",
+        body: JSON.stringify(params.data),
+      });
+      return { data: json };
+    }
     const { json } = await httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: "PATCH",
       body: JSON.stringify(params.data),
