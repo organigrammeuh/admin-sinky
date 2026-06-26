@@ -1,4 +1,4 @@
-import { ArrayField, Datagrid, Show, SimpleShowLayout, TextField } from "react-admin";
+import { ArrayField, Datagrid, ImageField, Show, SimpleShowLayout, TextField } from "react-admin";
 
 export const SpeakerShow = () =>(
     <Show>
@@ -6,7 +6,7 @@ export const SpeakerShow = () =>(
             <TextField source="id" />
             <TextField source="fullName" />
             <TextField source="bio" />
-            <TextField source="profilePicture" />
+            <ImageField source="profilePicture" />
             <TextField source="socialLinks" />
             <ArrayField source="sessions">
                 <Datagrid

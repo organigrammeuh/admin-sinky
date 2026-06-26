@@ -11,6 +11,17 @@ import {
 const apiUrl = import.meta.env.VITE_API_URL ?? "http://localhost:3000/api";
 const httpClient = fetchUtils.fetchJson;
 
+const uploadImage = async (file: File): Promise<string> => {
+    const formData = new FormData();
+    formData.append("file", file);
+    const res = await fetch(`${apiUrl}/upload`, {
+        method: "POST",
+        body: formData,
+    });
+    const { url } = await res.json();
+    return url;
+};
+
 const dataProvider: DataProvider = {
   getList: async (resource, params) => {
     const { page, perPage } = params.pagination;
@@ -30,7 +41,12 @@ const dataProvider: DataProvider = {
     }
 
     return {
-        data: json,
+        data: json.map((item: any) => {
+            if (resource === "speakers" && item.profilePicture) {
+                return { ...item, profilePicture: { src: item.profilePicture } };
+            }
+            return item;
+        }),
         total: parseInt(
             headers.get('content-range')!.split('/').pop()!,
             10
@@ -40,6 +56,9 @@ const dataProvider: DataProvider = {
 
   getOne: async (resource, params) => {
     const { json } = await httpClient(`${apiUrl}/${resource}/${params.id}`);
+    if (resource === "speakers" && json.profilePicture) {
+      json.profilePicture = { src: json.profilePicture };
+    }
     if (resource === "sessions") {
       console.log("avant transform:", json.room, json.speakers);
       json.roomId = json.room?.id;
@@ -84,6 +103,12 @@ const dataProvider: DataProvider = {
       return { data: json };
     }
 
+    if (params.data.profilePicture?.rawFile) {
+      params.data.profilePicture = await uploadImage(params.data.profilePicture.rawFile);
+    } else if (params.data.profilePicture?.src) {
+      params.data.profilePicture = params.data.profilePicture.src;
+    }
+
     const { json } = await httpClient(`${apiUrl}/${resource}`, {
       method: "POST",
       body: JSON.stringify(params.data),
@@ -92,9 +117,15 @@ const dataProvider: DataProvider = {
   },
   update: async (resource, params) => {
     if (resource === "speakers") {
+      let data = { ...params.data };
+      if (data.profilePicture?.rawFile) {
+        data.profilePicture = await uploadImage(data.profilePicture.rawFile);
+      } else if (data.profilePicture?.src) {
+        data.profilePicture = data.profilePicture.src;
+      }
       const { json } = await httpClient(`${apiUrl}/${resource}/${params.id}`, {
         method: "PUT",
-        body: JSON.stringify(params.data),
+        body: JSON.stringify(data),
       });
       return { data: json };
     }

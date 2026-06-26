@@ -7,6 +7,7 @@ import { EventCreate } from "./events/EventCreate";
 import { EventEdit } from "./events/EventEdit";
 import { SpeakerList } from "./speakers/SpeakerList";
 import { SpeakerShow } from "./speakers/SpeakerShow";
+import { SpeakerCreate } from "./speakers/SpeakerCreate";
 import { SpeakerEdit } from "./speakers/SpeakerEdit";
 import { SessionCreate } from "./sessions/SessionCreate";
 import { SessionShow } from "./sessions/SessionShow";
@@ -23,7 +24,7 @@ export const App = () => (
     />
     <Resource
       name="speakers"
-      // create={SpeakerCreate}
+      create={SpeakerCreate}
       list={SpeakerList}
       show={SpeakerShow}
       edit={SpeakerEdit}
