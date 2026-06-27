@@ -8,7 +8,7 @@ import {
   useRecordContext,
 } from "react-admin";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, Box, Paper, Typography } from "@mui/material";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 
 const BackToEventButton = () => {
@@ -30,24 +30,44 @@ const BackToEventButton = () => {
 };
 
 export const SessionShow = () => (
-  <Show>
+  <Show sx={{ "& .RaShow-card": { background: "transparent", boxShadow: "none" } }}>
     <SimpleShowLayout>
       <BackToEventButton />
-      <TextField source="id" />
-      <TextField source="title" />
-      <TextField source="description" />
-      <DateField source="startTime" />
-      <DateField source="endTime" />
-      <ArrayField source="speakers">
-        <Datagrid
-          bulkActionButtons={false}
-          rowClick={(id) => `/speakers/${id}/show`}
-        >
-          <TextField source="fullName" />
-          <TextField source="bio" />
-        </Datagrid>
-      </ArrayField>
-      {/* <TextField source="eventId" /> */}
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 3, width: "100%", mt: 1 }}>
+        <Paper sx={{ p: 3 }}>
+          <TextField source="title" variant="h4" className="text-gradient" sx={{ fontWeight: "800", mb: 2, display: "block" }} />
+          <TextField source="description" sx={{ lineHeight: 1.6, display: "block", mb: 3 }} />
+
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 4, borderTop: "1px solid", borderColor: "divider", pt: 2 }}>
+            <Box>
+              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>HORAIRE DE DÉBUT</Typography>
+              <DateField source="startTime" showTime sx={{ fontWeight: "500" }} />
+            </Box>
+            <Box>
+              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>HORAIRE DE FIN</Typography>
+              <DateField source="endTime" showTime sx={{ fontWeight: "500" }} />
+            </Box>
+          </Box>
+        </Paper>
+
+        <Paper sx={{ p: 3 }}>
+          <Typography variant="h6" className="text-gradient" sx={{ mb: 2, fontWeight: "bold" }}>Intervenants de la Session</Typography>
+          <ArrayField source="speakers">
+            <Datagrid
+              bulkActionButtons={false}
+              rowClick={(id) => `/speakers/${id}/show`}
+              sx={{
+                "& .MuiTableRow-root:nth-of-type(odd)": { backgroundColor: (theme) => theme.palette.background.paper },
+                "& .MuiTableRow-root:nth-of-type(even)": { backgroundColor: (theme) => theme.palette.mode === "dark" ? "#0b0b14" : "#f9fafb" },
+                "& .MuiTableRow-root:hover": { backgroundColor: (theme) => theme.palette.mode === "dark" ? "rgba(168, 85, 247, 0.08) !important" : "rgba(59, 130, 246, 0.04) !important" }
+              }}
+            >
+              <TextField source="fullName" label="Nom" sx={{ fontWeight: "bold", color: "primary.main" }} />
+              <TextField source="bio" label="Bio" />
+            </Datagrid>
+          </ArrayField>
+        </Paper>
+      </Box>
     </SimpleShowLayout>
   </Show>
 );
