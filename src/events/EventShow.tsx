@@ -11,9 +11,10 @@ import {
   DeleteButton,
 } from "react-admin";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 
 const CreateSessionButton = () => {
   const event = useRecordContext();
@@ -31,11 +32,27 @@ const CreateSessionButton = () => {
   );
 };
 
+const BackToEventList = () => {
+  return (
+    <Button
+      component={Link}
+      to={`/events`}
+      startIcon={<ArrowBack />}
+      variant="outlined"
+      size="small"
+      sx={{ mb: 2 }}
+    >
+      Back to events list
+    </Button>
+  );
+};
+
 const SessionsSection = () => {
   const event = useRecordContext();
   return (
     <>
       <CreateSessionButton />
+      
       <ReferenceManyField
         reference="sessions"
         target="eventId"
@@ -58,7 +75,7 @@ const SessionsSection = () => {
             )}
           />
           <ShowButton />
-          <DeleteButton redirect={`/events/${event.id}/show`} />
+          <DeleteButton redirect={`/events/${event!.id}/show`} />
         </Datagrid>
       </ReferenceManyField>
     </>
@@ -68,6 +85,7 @@ const SessionsSection = () => {
 export const EventShow = () => (
   <Show>
     <SimpleShowLayout>
+    <BackToEventList />
       <TextField source="id" />
       <TextField source="title" />
       <TextField source="description" />
