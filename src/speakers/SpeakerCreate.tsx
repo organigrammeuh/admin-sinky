@@ -1,7 +1,7 @@
-import { ArrayInput, Edit, ImageField, ImageInput, SimpleForm, SimpleFormIterator, TextInput, required } from "react-admin";
+import { ArrayInput, Create, ImageField, ImageInput, SimpleForm, SimpleFormIterator, TextInput, required } from "react-admin";
 
-export const SpeakerEdit = () =>(
-    <Edit>
+export const SpeakerCreate = () =>(
+    <Create>
         <SimpleForm>
       <TextInput source="fullName" validate={[required()]} />
                   <TextInput source="bio" validate={[required()]} multiline />
@@ -19,5 +19,5 @@ export const SpeakerEdit = () =>(
                       </SimpleFormIterator>
                   </ArrayInput>
         </SimpleForm>
-    </Edit>
+    </Create>
 ) 
