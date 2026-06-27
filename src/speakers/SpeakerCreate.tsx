@@ -24,7 +24,7 @@ export const SpeakerCreate = () => (
       </ImageInput>
       <ArrayInput source="socialLinks">
         <SimpleFormIterator>
-          <TextInput label="URL" />
+          <TextInput label="URL" source={""} />
         </SimpleFormIterator>
       </ArrayInput>
     </SimpleForm>
