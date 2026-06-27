@@ -14,7 +14,7 @@ export const SpeakerEdit = () => (
   <Edit>
     <SimpleForm sx={{ maxWidth: 600, p: 4 }}>
       <Typography variant="h5" className="text-gradient" color="primary" sx={{ fontWeight: "bold", mb: 3 }}>
-        Editer un Speaker
+        Modifier le Speaker
       </Typography>
 
       <TextInput source="fullName" validate={[required()]} fullWidth sx={{ mb: 2 }} />

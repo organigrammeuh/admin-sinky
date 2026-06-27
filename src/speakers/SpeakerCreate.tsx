@@ -14,7 +14,7 @@ export const SpeakerCreate = () => (
   <Create>
     <SimpleForm sx={{ maxWidth: 600, p: 4 }}>
       <Typography variant="h5" className="text-gradient" color="primary" sx={{ fontWeight: "bold", mb: 3 }}>
-        Ajouter un Speaker
+        Créer un Speaker
       </Typography>
 
       <TextInput source="fullName" validate={[required()]} fullWidth sx={{ mb: 2 }} />
