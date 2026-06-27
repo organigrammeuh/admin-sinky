@@ -11,7 +11,7 @@ import {
   DeleteButton,
 } from "react-admin";
 import { Link } from "react-router-dom";
-import { Button} from "@mui/material";
+import { Button } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowBack from "@mui/icons-material/ArrowBack";
@@ -52,7 +52,7 @@ const SessionsSection = () => {
   return (
     <>
       <CreateSessionButton />
-      
+
       <ReferenceManyField
         reference="sessions"
         target="eventId"
@@ -85,7 +85,7 @@ const SessionsSection = () => {
 export const EventShow = () => (
   <Show>
     <SimpleShowLayout>
-    <BackToEventList />
+      <BackToEventList />
       <TextField source="id" />
       <TextField source="title" />
       <TextField source="description" />
