@@ -14,6 +14,7 @@ import { Button, Box, Paper, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowBack from "@mui/icons-material/ArrowBack";
+import { EmptySessions } from "../sessions/SessionNotFound";
 
 const CreateSessionButton = () => {
   const event = useRecordContext();
@@ -65,6 +66,7 @@ const SessionsSection = () => {
       >
         <Datagrid
           bulkActionButtons={false}
+          empty={<EmptySessions />}
           rowClick={(id) => `/sessions/${id}/show`}
           sx={{
             "& .MuiTableRow-root:nth-of-type(odd)": { backgroundColor: (theme) => theme.palette.background.paper },

@@ -1,5 +1,6 @@
 import { ReferenceManyField, Datagrid, Show, SimpleShowLayout, TextField } from "react-admin";
 import { Box, Paper, Typography } from "@mui/material";
+import { EmptySessions } from "../sessions/SessionNotFound";
 
 export const RoomShow = () => (
   <Show sx={{ "& .RaShow-card": { background: "transparent", boxShadow: "none" } }}>
@@ -16,6 +17,7 @@ export const RoomShow = () => (
             <Datagrid 
               bulkActionButtons={false} 
               rowClick={(id) => `/sessions/${id}/show`}
+              empty={<EmptySessions />}
               sx={{
                 "& .MuiTableRow-root:nth-of-type(odd)": { backgroundColor: (theme) => theme.palette.background.paper },
                 "& .MuiTableRow-root:nth-of-type(even)": { backgroundColor: (theme) => theme.palette.mode === "dark" ? "#0b0b14" : "#f9fafb" },

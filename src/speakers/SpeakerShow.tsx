@@ -8,14 +8,7 @@ import {
 } from "react-admin";
 import { Box, Paper, Typography } from "@mui/material";
 import { getImageSource } from "./SpeakerList";
-
-const EmptySessions = () => (
-  <Box sx={{ p: 2, textAlign: "center" }}>
-    <Typography variant="body2" color="textSecondary">
-      Aucune session planifiée pour cet intervenant
-    </Typography>
-  </Box>
-);
+import { EmptySessions } from "../sessions/SessionNotFound";
 
 export const SpeakerShow = () => (
   <Show sx={{ "& .RaShow-card": { background: "transparent", boxShadow: "none" } }}>
