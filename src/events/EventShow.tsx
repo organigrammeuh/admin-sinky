@@ -7,6 +7,8 @@ import {
   Datagrid,
   FunctionField,
   useRecordContext,
+  ShowButton,
+  DeleteButton,
 } from "react-admin";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
@@ -55,6 +57,8 @@ const SessionsSection = () => {
               </Button>
             )}
           />
+            <ShowButton />
+            <DeleteButton />
         </Datagrid>
       </ReferenceManyField>
     </>
