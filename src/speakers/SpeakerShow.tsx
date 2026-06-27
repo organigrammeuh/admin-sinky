@@ -7,6 +7,8 @@ import {
   TextField,
 } from "react-admin";
 
+import { getImageSource } from "./SpeakerList";
+
 export const SpeakerShow = () => (
   <Show>
     <SimpleShowLayout>
@@ -17,7 +19,7 @@ export const SpeakerShow = () => (
         render={(record) =>
           record.profilePicture?.src ? (
             <img
-              src={record.profilePicture.src}
+              src={ getImageSource(record.profilePicture.src)}
               style={{ width: 200, height: 100, objectFit: "contain" }}
             />
           ) : null
