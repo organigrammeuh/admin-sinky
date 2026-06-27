@@ -17,7 +17,9 @@ const eventFilters = [
     source="end_date"
     label="Before"
     validate={(value, allValues) =>
-      value && allValues?.startDate_gte && new Date(value) < new Date(allValues.startDate_gte)
+      value &&
+      allValues?.startDate_gte &&
+      new Date(value) < new Date(allValues.startDate_gte)
         ? "Before date must not be earlier than After date"
         : undefined
     }

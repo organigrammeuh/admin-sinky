@@ -29,11 +29,11 @@ export const App = () => (
       show={SpeakerShow}
       edit={SpeakerEdit}
     />
-    <Resource 
-    name="sessions"
-    create={SessionCreate}
-    show={SessionShow}
-    edit={SessionEdit}
-     />
+    <Resource
+      name="sessions"
+      create={SessionCreate}
+      show={SessionShow}
+      edit={SessionEdit}
+    />
   </Admin>
 );
