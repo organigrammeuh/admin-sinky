@@ -16,9 +16,10 @@ import { RoomList } from "./rooms/RoomList";
 import { RoomShow } from "./rooms/RoomShow";
 import { RoomCreate } from "./rooms/RoomCreate";
 import { RoomEdit } from "./rooms/RoomEdit";
+import authProvider from "./authProvider";
 
 export const App = () => (
-  <Admin layout={Layout} dataProvider={dataProvider}>
+  <Admin layout={Layout} authProvider={authProvider} dataProvider={dataProvider}>
     <Resource
       name="events"
       create={EventCreate}
