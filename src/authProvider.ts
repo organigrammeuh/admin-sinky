@@ -1,4 +1,3 @@
-// authProvider.js
 import Cookies from 'js-cookie';
 
 const API_URL =  'http://localhost:3000/api';
