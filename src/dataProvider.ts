@@ -12,45 +12,44 @@ const apiUrl = import.meta.env.VITE_API_URL ?? "http://localhost:3000/api";
 const httpClient = fetchUtils.fetchJson;
 
 const uploadImage = async (file: File): Promise<string> => {
-    const formData = new FormData();
-    formData.append("file", file);
-    const res = await fetch(`${apiUrl}/upload`, {
-        method: "POST",
-        body: formData,
-    });
-    const { url } = await res.json();
-    return url;
+  const formData = new FormData();
+  formData.append("file", file);
+  const res = await fetch(`${apiUrl}/upload`, {
+    method: "POST",
+    body: formData,
+  });
+  const { url } = await res.json();
+  return url;
 };
 
 const dataProvider: DataProvider = {
   getList: async (resource, params) => {
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
-    
+
     const query = {
-        sort: JSON.stringify([field, order]),
-        range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-        filter: JSON.stringify(params.filter),
+      sort: JSON.stringify([field, order]),
+      range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+      filter: JSON.stringify(params.filter),
     };
 
     const url = `${apiUrl}/${resource}?${new URLSearchParams(query)}`;
     const { json, headers } = await httpClient(url);
 
-    if (!headers.has('content-range')) {
-        throw new Error('The Content-Range header is missing in the HTTP Response. The simple REST data provider expects responses for lists of resources to include this header. Please check the API.');
+    if (!headers.has("content-range")) {
+      throw new Error(
+        "The Content-Range header is missing in the HTTP Response. The simple REST data provider expects responses for lists of resources to include this header. Please check the API.",
+      );
     }
 
     return {
-        data: json.map((item: any) => {
-            if (resource === "speakers" && item.profilePicture) {
-                return { ...item, profilePicture: { src: item.profilePicture } };
-            }
-            return item;
-        }),
-        total: parseInt(
-            headers.get('content-range')!.split('/').pop()!,
-            10
-        ),
+      data: json.map((item: any) => {
+        if (resource === "speakers" && item.profilePicture) {
+          return { ...item, profilePicture: { src: item.profilePicture } };
+        }
+        return item;
+      }),
+      total: parseInt(headers.get("content-range")!.split("/").pop()!, 10),
     };
   },
 
@@ -88,15 +87,15 @@ const dataProvider: DataProvider = {
           method: "POST",
           body: JSON.stringify({
             ...rest,
-            id_room: roomId
+            id_room: roomId,
           }),
-        }
+        },
       );
 
       for (const speakerId of speakerIds ?? []) {
         await httpClient(
           `${apiUrl}/events/${eventId}/sessions/${json.id}/speakers/${speakerId}/associate`,
-          { method: "PATCH" }
+          { method: "PATCH" },
         );
       }
 
@@ -104,7 +103,9 @@ const dataProvider: DataProvider = {
     }
 
     if (params.data.profilePicture?.rawFile) {
-      params.data.profilePicture = await uploadImage(params.data.profilePicture.rawFile);
+      params.data.profilePicture = await uploadImage(
+        params.data.profilePicture.rawFile,
+      );
     } else if (params.data.profilePicture?.src) {
       params.data.profilePicture = params.data.profilePicture.src;
     }
@@ -117,7 +118,7 @@ const dataProvider: DataProvider = {
   },
   update: async (resource, params) => {
     if (resource === "speakers") {
-      let data = { ...params.data };
+      const data = { ...params.data };
       if (data.profilePicture?.rawFile) {
         data.profilePicture = await uploadImage(data.profilePicture.rawFile);
       } else if (data.profilePicture?.src) {
@@ -132,7 +133,8 @@ const dataProvider: DataProvider = {
     if (resource === "sessions") {
       console.log("params.data:", params.data);
       console.log("params.previousData:", params.previousData);
-      const { speakerIds, roomId, speakers, room, eventId, ...rest } = params.data;
+      const { speakerIds, roomId, speakers, room, eventId, ...rest } =
+        params.data;
 
       const resolvedEventId = eventId ?? params.previousData?.eventId;
 
@@ -143,29 +145,29 @@ const dataProvider: DataProvider = {
         {
           method: "PATCH",
           body: JSON.stringify({ ...rest, roomId }),
-        }
+        },
       );
 
       const previousSpeakerIds = params.previousData?.speakerIds ?? [];
       const newSpeakerIds = speakerIds ?? [];
 
       const toAssociate = newSpeakerIds.filter(
-        (id: string) => !previousSpeakerIds.includes(id)
+        (id: string) => !previousSpeakerIds.includes(id),
       );
       for (const speakerId of toAssociate) {
         await httpClient(
           `${apiUrl}/events/${resolvedEventId}/sessions/${params.id}/speakers/${speakerId}/associate`,
-          { method: "PATCH" }
+          { method: "PATCH" },
         );
       }
 
       const toDissociate = previousSpeakerIds.filter(
-        (id: string) => !newSpeakerIds.includes(id)
+        (id: string) => !newSpeakerIds.includes(id),
       );
       for (const speakerId of toDissociate) {
         await httpClient(
           `${apiUrl}/events/${resolvedEventId}/sessions/${params.id}/speakers/${speakerId}/dissociate`,
-          { method: "PATCH" }
+          { method: "PATCH" },
         );
       }
 
