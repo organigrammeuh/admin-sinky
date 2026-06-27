@@ -11,9 +11,9 @@ const speakerFilters = [
   <TextInput source="full_name" label="Search by full name" alwaysOn />,
 ];
 
-export const getImageSource = (url : string) => {
-    return url.startsWith('http') ? url : 'http://localhost:3000/' + url;
-}
+export const getImageSource = (url: string) => {
+  return url.startsWith("http") ? url : "http://localhost:3000/" + url;
+};
 
 export const SpeakerList = () => (
   <List filters={speakerFilters}>
@@ -25,7 +25,7 @@ export const SpeakerList = () => (
           render={(record) =>
             record.profilePicture?.src ? (
               <img
-                src={ getImageSource(record.profilePicture.src)}
+                src={getImageSource(record.profilePicture.src)}
                 className="profile-picture"
               />
             ) : null

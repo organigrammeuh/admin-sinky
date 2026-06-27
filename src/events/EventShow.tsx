@@ -57,8 +57,8 @@ const SessionsSection = () => {
               </Button>
             )}
           />
-            <ShowButton />
-            <DeleteButton />
+          <ShowButton />
+          <DeleteButton />
         </Datagrid>
       </ReferenceManyField>
     </>

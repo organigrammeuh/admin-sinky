@@ -19,7 +19,7 @@ export const SpeakerShow = () => (
         render={(record) =>
           record.profilePicture?.src ? (
             <img
-              src={ getImageSource(record.profilePicture.src)}
+              src={getImageSource(record.profilePicture.src)}
               style={{ width: 200, height: 100, objectFit: "contain" }}
             />
           ) : null

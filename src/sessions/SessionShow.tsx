@@ -5,12 +5,34 @@ import {
   Show,
   SimpleShowLayout,
   TextField,
+  useRecordContext,
 } from "react-admin";
-import { Navigate } from "react-router";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+
+const BackToEventButton = () => {
+  const session = useRecordContext();
+  const eventId = session?.event?.id;
+  if (!eventId) return null;
+  return (
+    <Button
+      component={Link}
+      to={`/events/${eventId}/show`}
+      startIcon={<ArrowBack />}
+      variant="outlined"
+      size="small"
+      sx={{ mb: 2 }}
+    >
+      Back to Event
+    </Button>
+  );
+};
 
 export const SessionShow = () => (
   <Show>
     <SimpleShowLayout>
+      <BackToEventButton />
       <TextField source="id" />
       <TextField source="title" />
       <TextField source="description" />
