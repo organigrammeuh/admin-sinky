@@ -9,6 +9,14 @@ import {
 import { Box, Paper, Typography } from "@mui/material";
 import { getImageSource } from "./SpeakerList";
 
+const EmptySessions = () => (
+  <Box sx={{ p: 2, textAlign: "center" }}>
+    <Typography variant="body2" color="textSecondary">
+      Aucune session planifiée pour cet intervenant
+    </Typography>
+  </Box>
+);
+
 export const SpeakerShow = () => (
   <Show sx={{ "& .RaShow-card": { background: "transparent", boxShadow: "none" } }}>
     <SimpleShowLayout>
@@ -41,12 +49,12 @@ export const SpeakerShow = () => (
         <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 3 }}>
           <Paper sx={{ p: 3 }}>
             <Typography variant="h6" className="text-gradient" sx={{ mb: 1, fontWeight: "bold" }}>Biographie</Typography>
-            <TextField source="bio" sx={{ lineHeight: 1.6 }} />
+            <TextField source="bio" sx={{ lineHeight: 1.6, display: "block"}} />
           </Paper>
 
           <Paper sx={{ p: 3 }}>
             <Typography variant="h6" className="text-gradient" sx={{ mb: 1, fontWeight: "bold" }}>Réseaux Sociaux</Typography>
-            <TextField source="socialLinks" />
+            <TextField source="socialLinks" sx={{display:"block"}}/>
           </Paper>
 
           <Paper sx={{ p: 3 }}>
@@ -55,6 +63,7 @@ export const SpeakerShow = () => (
               <Datagrid 
                 bulkActionButtons={false} 
                 rowClick={(id) => `/sessions/${id}/show`}
+                empty={<EmptySessions />}
                 sx={{
                   "& .MuiTableRow-root:nth-of-type(odd)": { backgroundColor: (theme) => theme.palette.background.paper },
                   "& .MuiTableRow-root:nth-of-type(even)": { backgroundColor: (theme) => theme.palette.mode === "dark" ? "#0b0b14" : "#f9fafb" },
