@@ -2,6 +2,7 @@ import {
   ArrayField,
   Datagrid,
   FunctionField,
+  ReferenceManyField,
   Show,
   SimpleShowLayout,
   TextField,
@@ -26,14 +27,11 @@ export const SpeakerShow = () => (
         }
       />
       <TextField source="socialLinks" />
-      <ArrayField source="sessions">
-        <Datagrid
-          bulkActionButtons={false}
-          rowClick={(id) => `/sessions/${id}/show`}
-        >
+       <ReferenceManyField reference="sessions" target="speakerId" label="Sessions">
+        <Datagrid bulkActionButtons={false} rowClick={(id) => `/sessions/${id}/show`}>
           <TextField source="title" />
         </Datagrid>
-      </ArrayField>
+      </ReferenceManyField>
     </SimpleShowLayout>
   </Show>
 );

@@ -206,7 +206,16 @@ const dataProvider: DataProvider = {
         );
         return { data: filtered, total: filtered.length };
       }
-
+if (params.target === "speakerId") {
+    const speakerId = params.id;
+    const url = `${apiUrl}/sessions`;
+    const { json } = await httpClient(url);
+    const filtered = json.filter(
+        (session: any) =>
+            session.speakers?.some((s: any) => s.id === speakerId)
+    );
+    return { data: filtered, total: filtered.length };
+}
       throw new Error(`Unsupported target ${params.target} for sessions`);
     }
 
