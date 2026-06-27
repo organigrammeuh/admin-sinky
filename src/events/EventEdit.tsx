@@ -1,7 +1,7 @@
 import { DateInput, Edit, required, SimpleForm, TextInput } from "react-admin";
 
 export const EventEdit = () => (
-  <Edit>
+  <Edit redirect="show">
     <SimpleForm>
       <TextInput source="title" validate={[required()]} />
       <TextInput source="description" validate={[required()]} />

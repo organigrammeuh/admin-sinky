@@ -8,7 +8,7 @@ import {
 
 export const EventCreate = () => {
   return (
-    <Create>
+    <Create redirect="show">
       <SimpleForm>
         <TextInput source="title" validate={[required()]} />
         <TextInput source="description" validate={[required()]} />

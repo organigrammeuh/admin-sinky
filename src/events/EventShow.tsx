@@ -58,7 +58,7 @@ const SessionsSection = () => {
             )}
           />
           <ShowButton />
-          <DeleteButton />
+          <DeleteButton redirect={`/events/${event.id}/show`} />
         </Datagrid>
       </ReferenceManyField>
     </>

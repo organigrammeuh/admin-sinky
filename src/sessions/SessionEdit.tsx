@@ -18,7 +18,10 @@ export const SessionEdit = () => {
   const eventId = searchParams.get("eventId");
 
   return (
-    <Edit transform={(data) => ({ ...data, eventId })}>
+    <Edit
+      transform={(data) => ({ ...data, eventId })}
+      redirect={eventId ? `/events/${eventId}/show` : false}
+    >
       <SimpleForm>
         <TextInput source="title" validate={[required()]} />
         <TextInput source="description" validate={[required()]} />

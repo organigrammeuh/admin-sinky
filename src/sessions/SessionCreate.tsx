@@ -18,7 +18,10 @@ export const SessionCreate = () => {
   const eventId = searchParams.get("eventId");
 
   return (
-    <Create transform={(data) => ({ ...data, eventId })}>
+    <Create
+      transform={(data) => ({ ...data, eventId })}
+      redirect={eventId ? `/events/${eventId}/show` : false}
+    >
       <SimpleForm>
         <TextInput source="title" validate={[required()]} />
         <TextInput source="description" validate={[required()]} />
