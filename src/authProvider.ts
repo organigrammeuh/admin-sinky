@@ -1,11 +1,10 @@
 import Cookies from "js-cookie";
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = import.meta.env.VITE_API_URL || "/api";
 
 export const authProvider = {
   login: async ({ email, password }: { email: string; password: string }) => {
     const body = JSON.stringify({ email: email.trim(), password });
-    console.log("Sending:", body);
     const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -22,6 +21,24 @@ export const authProvider = {
     Cookies.set("user", JSON.stringify(user), { expires: 1 });
 
     return Promise.resolve();
+  },
+
+  register: async ({
+    fullName,
+    email,
+    password,
+  }: {
+    fullName: string;
+    email: string;
+    password: string;
+  }) => {
+    const res = await fetch(`${API_URL}/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fullName, email, password }),
+    });
+    if (!res.ok) throw new Error("Registration failed");
+    return res.json();
   },
 
   logout: () => {
