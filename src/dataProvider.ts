@@ -190,11 +190,35 @@ const dataProvider: DataProvider = {
 
   getManyReference: async (resource, params) => {
     if (resource === "sessions") {
-      const eventId = params.id;
-      const url = `${apiUrl}/events/${eventId}/sessions`;
-      const { json } = await httpClient(url);
-      return { data: json, total: json.length };
+      if (params.target === "eventId") {
+        const eventId = params.id;
+        const url = `${apiUrl}/events/${eventId}/sessions`;
+        const { json } = await httpClient(url);
+        return { data: json, total: json.length };
+      }
+
+      if (params.target === "roomId") {
+        const roomId = params.id;
+        const url = `${apiUrl}/sessions`;
+        const { json } = await httpClient(url);
+        const filtered = json.filter(
+          (session: any) => session.room?.id === roomId
+        );
+        return { data: filtered, total: filtered.length };
+      }
+if (params.target === "speakerId") {
+    const speakerId = params.id;
+    const url = `${apiUrl}/sessions`;
+    const { json } = await httpClient(url);
+    const filtered = json.filter(
+        (session: any) =>
+            session.speakers?.some((s: any) => s.id === speakerId)
+    );
+    return { data: filtered, total: filtered.length };
+}
+      throw new Error(`Unsupported target ${params.target} for sessions`);
     }
+
     throw new Error("getManyReference not implemented for " + resource);
   },
   updateMany: function <RecordType extends RaRecord = any>(

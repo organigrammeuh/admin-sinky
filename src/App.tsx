@@ -16,11 +16,14 @@ import { RoomList } from "./rooms/RoomList";
 import { RoomShow } from "./rooms/RoomShow";
 import { RoomCreate } from "./rooms/RoomCreate";
 import { RoomEdit } from "./rooms/RoomEdit";
+import { darkTheme, lightTheme } from "./theme/theme";
 import authProvider from "./authProvider";
 import { LoginPage } from "./LoginPage";
 
 export const App = () => (
   <Admin
+    theme={lightTheme} 
+    darkTheme={darkTheme}
     layout={Layout}
     authProvider={authProvider}
     dataProvider={dataProvider}

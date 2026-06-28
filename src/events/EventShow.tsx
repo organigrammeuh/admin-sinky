@@ -7,14 +7,14 @@ import {
   Datagrid,
   FunctionField,
   useRecordContext,
-  ShowButton,
   DeleteButton,
 } from "react-admin";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, Box, Paper, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowBack from "@mui/icons-material/ArrowBack";
+import { EmptySessions } from "../sessions/SessionNotFound";
 
 const CreateSessionButton = () => {
   const event = useRecordContext();
@@ -24,6 +24,7 @@ const CreateSessionButton = () => {
       to={`/sessions/create?eventId=${event?.id}`}
       startIcon={<AddIcon />}
       variant="contained"
+      color="primary"
       size="small"
       sx={{ mb: 2 }}
     >
@@ -50,49 +51,84 @@ const BackToEventList = () => {
 const SessionsSection = () => {
   const event = useRecordContext();
   return (
-    <>
-      <CreateSessionButton />
+    <Paper sx={{ p: 3, mt: 3, width: "100%" }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
+        <Typography variant="h6" className="text-gradient" sx={{ fontWeight: "bold" }}>
+          Sessions Planifiées
+        </Typography>
+        <CreateSessionButton />
+      </Box>
 
       <ReferenceManyField
         reference="sessions"
         target="eventId"
-        label="Sessions"
+        label=""
       >
-        <Datagrid bulkActionButtons={false} rowClick={false}>
-          <TextField source="title" />
+        <Datagrid
+          bulkActionButtons={false}
+          empty={<EmptySessions />}
+          rowClick={(id) => `/sessions/${id}/show`}
+          sx={{
+            "& .MuiTableRow-root:nth-of-type(odd)": { backgroundColor: (theme) => theme.palette.background.paper },
+            "& .MuiTableRow-root:nth-of-type(even)": { backgroundColor: (theme) => theme.palette.mode === "dark" ? "#0b0b14" : "#f9fafb" },
+            "& .MuiTableRow-root:hover": { backgroundColor: (theme) => theme.palette.mode === "dark" ? "rgba(168, 85, 247, 0.08) !important" : "rgba(59, 130, 246, 0.04) !important" }
+          }}
+        >
+          <TextField source="title" sx={{ fontWeight: "bold", color: "primary.main" }} />
           <TextField source="room.name" label="Room" />
           <DateField source="startTime" showTime />
           <FunctionField
+            onClick={(e) => e.stopPropagation()}
             render={(session: any) => (
               <Button
                 component={Link}
                 to={`/sessions/${session?.id}?eventId=${event?.id}`}
                 size="small"
                 startIcon={<EditIcon />}
+                color="primary"
               >
                 Edit
               </Button>
             )}
           />
-          <ShowButton />
-          <DeleteButton redirect={`/events/${event!.id}/show`} />
+          <DeleteButton
+            onClick={(e) => e.stopPropagation()}
+            redirect={`/events/${event!.id}/show`}
+            color="error"
+          />
         </Datagrid>
       </ReferenceManyField>
-    </>
+    </Paper>
   );
-};
+  
 
-export const EventShow = () => (
-  <Show>
+}; export const EventShow = () => (
+  <Show sx={{ "& .RaShow-card": { background: "transparent", boxShadow: "none" } }}>
     <SimpleShowLayout>
       <BackToEventList />
-      <TextField source="id" />
-      <TextField source="title" />
-      <TextField source="description" />
-      <DateField source="startDate" />
-      <DateField source="endDate" />
-      <TextField source="location" />
-      <SessionsSection />
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 3, width: "100%", mt: 1 }}>
+        <Paper sx={{ p: 3 }}>
+          <TextField source="title" variant="h4" className="text-gradient" sx={{ fontWeight: "800", mb: 2, display: "block" }} />
+          <TextField source="description" sx={{ lineHeight: 1.6, display: "block", mb: 3 }} />
+
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 4, borderTop: "1px solid", borderColor: "divider", pt: 2 }}>
+            <Box>
+              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>DATE DE DÉBUT</Typography>
+              <DateField source="startDate" sx={{ fontWeight: "500" }} />
+            </Box>
+            <Box>
+              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>DATE DE FIN</Typography>
+              <DateField source="endDate" sx={{ fontWeight: "500" }} />
+            </Box>
+            <Box>
+              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>LIEU</Typography>
+              <TextField source="location" sx={{ fontWeight: "500", color: "secondary.main" }} />
+            </Box>
+          </Box>
+        </Paper>
+
+        <SessionsSection />
+      </Box>
     </SimpleShowLayout>
   </Show>
 );
