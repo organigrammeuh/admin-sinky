@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useNotify, Notification } from "react-admin";
-import { Box, TextField, Button, CircularProgress, Typography } from "@mui/material";
+import { Box, TextField, Button, CircularProgress, Typography, Divider } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { authProvider } from "./authProvider";
+
+const API_URL = import.meta.env.VITE_API_URL || "/api";
 
 export const RegisterPage = () => {
   const [fullName, setFullName] = useState("");
@@ -82,6 +84,24 @@ export const RegisterPage = () => {
         />
         <Button type="submit" variant="contained" disabled={loading}>
           {loading ? <CircularProgress size={20} /> : "Sign up"}
+        </Button>
+
+        <Divider sx={{ my: 1 }}>or</Divider>
+
+        <Button
+          variant="outlined"
+          fullWidth
+          onClick={() => (window.location.href = `${API_URL}/auth/google/redirect`)}
+        >
+          Sign up with Google
+        </Button>
+
+        <Button
+          variant="outlined"
+          fullWidth
+          onClick={() => (window.location.href = `${API_URL}/auth/github/redirect`)}
+        >
+          Sign up with GitHub
         </Button>
 
         <Typography
