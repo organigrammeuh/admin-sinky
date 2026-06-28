@@ -9,7 +9,7 @@ export const authProvider = {
     const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email, password }),
+      body,
     });
 
     if (!response.ok) {
