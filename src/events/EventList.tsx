@@ -7,7 +7,9 @@ import {
   List,
   TextInput,
   TextField,
+  useRecordContext,
 } from "react-admin";
+import { Chip } from "@mui/material";
 
 const eventFilters = [
   <TextInput source="title" label="Search by title" alwaysOn />,
@@ -27,27 +29,52 @@ const eventFilters = [
   />,
 ];
 
+const StatusChip = () => {
+  const record = useRecordContext();
+  if (!record) return null;
+
+  const now = new Date();
+  const start = new Date(record.startDate);
+  const end = new Date(record.endDate);
+
+  let label: string;
+  let color: "default" | "primary" | "success" | "error";
+
+  if (end < now) { label = "Passed"; color = "default"; }
+  else if (start <= now) { label = "Ongoing"; color = "success"; }
+  else { label = "Upcoming"; color = "primary"; }
+
+  return (
+    <Chip
+      label={label}
+      size="small"
+      color={color}
+      variant="outlined"
+      sx={{ fontWeight: 600, minWidth: 74, fontSize: "0.72rem" }}
+    />
+  );
+};
+
 export const EventList = () => (
-  <List filters={eventFilters} sx={{ "& .RaList-main": { marginTop: 2 } }}>
-    <Datagrid 
-      rowClick="show" 
+  <List filters={eventFilters}>
+    <Datagrid
+      rowClick="show"
       bulkActionButtons={false}
       sx={{
-        "& .MuiTableRow-root:nth-of-type(odd)": {
-          backgroundColor: (theme) => theme.palette.background.paper,
+        "& .MuiTableHead-root .MuiTableCell-root": {
+          fontWeight: 700,
+          textTransform: "uppercase",
+          fontSize: "0.72rem",
+          letterSpacing: "0.05em",
+          color: "text.secondary",
         },
-        "& .MuiTableRow-root:nth-of-type(even)": {
-          backgroundColor: (theme) => theme.palette.mode === "dark" ? "#0b0b14" : "#f9fafb",
-        },
-        "& .MuiTableRow-root:hover": {
-          backgroundColor: (theme) => theme.palette.mode === "dark" ? "rgba(168, 85, 247, 0.08) !important" : "rgba(59, 130, 246, 0.04) !important",
-        }
       }}
     >
-      <TextField source="title" label="Titre" sx={{ fontWeight: "bold", color: "primary.main" }} />
-      <DateField source="startDate" label="Date de début" locales="en-US" />
-      <DateField source="endDate" label="Date de fin" locales="en-US" />
-      <TextField source="location" label="Lieu" />
+      <TextField source="title" label="Event" sx={{ fontWeight: 600 }} />
+      <StatusChip label="Status" />
+      <DateField source="startDate" label="Start" locales="en-US" />
+      <DateField source="endDate" label="End" locales="en-US" />
+      <TextField source="location" label="Location" />
       <EditButton color="primary" />
       <DeleteButton color="error" />
     </Datagrid>
