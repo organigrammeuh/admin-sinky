@@ -1,9 +1,9 @@
-import { AppBar } from 'react-admin';
+import { AppBar, UserMenu, Logout } from 'react-admin';
 import { Typography, Box } from '@mui/material';
-import type { ReactNode } from 'react';
+import type { AppBarProps } from 'react-admin';
 
-export const MyAppBar = ({ children, ...props }: { children?: ReactNode }) => (
-  <AppBar {...props} color="secondary" square>
+export const MyAppBar = (props: AppBarProps) => (
+  <AppBar {...props} color="secondary" square userMenu={<UserMenu><Logout /></UserMenu>}>
     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
       <Typography
         variant="h6"
@@ -19,6 +19,5 @@ export const MyAppBar = ({ children, ...props }: { children?: ReactNode }) => (
       </Typography>
     </Box>
     <Box sx={{ flexGrow: 1 }} />
-    {children}
   </AppBar>
 );

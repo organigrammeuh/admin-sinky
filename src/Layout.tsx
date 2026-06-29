@@ -1,19 +1,9 @@
 import type { ReactNode } from "react";
-import {
-  Layout as RALayout,
-  CheckForApplicationUpdate,
-  UserMenu,
-  Logout,
-} from "react-admin";
+import { Layout as RALayout, CheckForApplicationUpdate } from "react-admin";
+import { MyAppBar } from "./MyAppBar";
 
 export const Layout = ({ children }: { children: ReactNode }) => (
-  <RALayout
-    userMenu={
-      <UserMenu>
-        <Logout />
-      </UserMenu>
-    }
-  >
+  <RALayout appBar={MyAppBar}>
     {children}
     <CheckForApplicationUpdate />
   </RALayout>
