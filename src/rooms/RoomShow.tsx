@@ -24,12 +24,12 @@ export const RoomShow = () => (
     <SimpleShowLayout>
       <BackToRoomList />
       <Box sx={{ display: "flex", flexDirection: "column", gap: 3, width: "100%", mt: 1 }}>
-        <Paper sx={{ p: 3 }}>
+        <Paper sx={{ p: 3, borderRadius: "12px" }}>
           <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold", mb: 0.5 }}>NOM DE LA SALLE</Typography>
           <TextField source="name" variant="h4" sx={{ fontWeight: "800", color: "primary.main" }} />
         </Paper>
 
-        <Paper sx={{ p: 3 }}>
+        <Paper sx={{ p: 3, borderRadius: "12px" }}>
           <Typography variant="h6" className="text-gradient" sx={{ mb: 2, fontWeight: "bold" }}>Sessions Associées</Typography>
           <ReferenceManyField reference="sessions" target="roomId" label="">
             <Datagrid
