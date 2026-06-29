@@ -76,7 +76,7 @@ export const lightTheme = createTheme({
       },
     },
   },
-});
+}});
 
 export const darkTheme = createTheme({
   ...defaultTheme,
@@ -127,4 +127,4 @@ export const darkTheme = createTheme({
       },
     },
   },
-});
+}});
