@@ -12,12 +12,23 @@ import { Box, Typography } from "@mui/material";
 
 export const SpeakerEdit = () => (
   <Edit>
-    <SimpleForm sx={{ maxWidth: 600, p: 4 }}>
-      <Typography variant="h5" className="text-gradient" color="primary" sx={{ fontWeight: "bold", mb: 3 }}>
-        Modifier le Speaker
-      </Typography>
+    <SimpleForm
+      sx={{
+        maxWidth: 600,
+        "& .MuiPaper-root": {
+          bgcolor: "background.paper",
+          border: "1px solid",
+          borderColor: "divider",
+          borderRadius: "12px",
+        },
+      }}
+    >
+      <Box sx={{ px: 3, pt: 3, pb: 1 }}>
+        <Typography sx={{ fontWeight: 700, fontSize: "1.2rem", mb: 3 }}>
+          Edit speaker
+        </Typography>
 
-      <TextInput source="fullName" validate={[required()]} fullWidth sx={{ mb: 2 }} />
+        <TextInput source="fullName" validate={[required()]} fullWidth sx={{ mb: 2 }} />
       <TextInput source="bio" validate={[required()]} multiline rows={4} fullWidth sx={{ mb: 2 }} />
 
       <Box sx={{
@@ -46,6 +57,7 @@ export const SpeakerEdit = () => (
           <TextInput label="URL" source="" fullWidth />
         </SimpleFormIterator>
       </ArrayInput>
+      </Box>
     </SimpleForm>
   </Edit>
 );
