@@ -2,19 +2,36 @@ import {
   ArrayField,
   Datagrid,
   FunctionField,
+  Link,
   Show,
   SimpleShowLayout,
   TextField,
 } from "react-admin";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Button, Paper, Typography } from "@mui/material";
 import { getImageSource } from "./SpeakerList";
 import { EmptySessions } from "../sessions/SessionNotFound";
+import { ArrowBack } from "@mui/icons-material";
+const BackToSpeakerList = () => {
+  return (
+    <Button
+      component={Link}
+      to={`/speakers`}
+      startIcon={<ArrowBack />}
+      variant="outlined"
+      size="small"
+      sx={{ mb: 2 }}
+    >
+      Back to speakers list
+    </Button>
+  );
+};
 
 export const SpeakerShow = () => (
   <Show sx={{ "& .RaShow-card": { background: "transparent", boxShadow: "none" } }}>
     <SimpleShowLayout>
+      <BackToSpeakerList />
       <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 4, mt: 2, width: "100%" }}>
-        
+
         <Paper sx={{ p: 3, display: "flex", flexDirection: "column", alignItems: "center", minWidth: 250, height: "fit-content" }}>
           <FunctionField
             render={(record) =>
@@ -42,19 +59,68 @@ export const SpeakerShow = () => (
         <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 3 }}>
           <Paper sx={{ p: 3 }}>
             <Typography variant="h6" className="text-gradient" sx={{ mb: 1, fontWeight: "bold" }}>Biographie</Typography>
-            <TextField source="bio" sx={{ lineHeight: 1.6, display: "block"}} />
+            <TextField source="bio" sx={{ lineHeight: 1.6, display: "block" }} />
           </Paper>
 
           <Paper sx={{ p: 3 }}>
-            <Typography variant="h6" className="text-gradient" sx={{ mb: 1, fontWeight: "bold" }}>Réseaux Sociaux</Typography>
-            <TextField source="socialLinks" sx={{display:"block"}}/>
+            <Typography variant="h6" className="text-gradient" sx={{ mb: 1, fontWeight: "bold" }}>
+              Réseaux Sociaux
+            </Typography>
+
+            <FunctionField
+              render={(record) => {
+                if (!record?.socialLinks || !Array.isArray(record.socialLinks)) {
+                  return (
+                    <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
+                      Aucun lien disponible
+                    </Typography>
+                  );
+                }
+
+                return (
+                  <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5, mt: 1 }}>
+                    {record.socialLinks.map((link: string, index: number) => {
+                      let cleanLink = link.trim();
+                      if (cleanLink.startsWith("https//")) {
+                        cleanLink = cleanLink.replace("https//", "https://");
+                      } else if (!cleanLink.startsWith("http://") && !cleanLink.startsWith("https://")) {
+                        cleanLink = `https://${cleanLink}`;
+                      }
+
+                      return (
+                        <Typography
+                          key={index}
+                          variant="body2"
+                          component="a"
+                          href={cleanLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          sx={{
+                            color: "primary.main",
+                            textDecoration: "none",
+                            width: "fit-content",
+                            fontWeight: 500,
+                            ":hover": {
+                              textDecoration: "underline",
+                              color: "secondary.main"
+                            }
+                          }}
+                        >
+                          {link}
+                        </Typography>
+                      );
+                    })}
+                  </Box>
+                );
+              }}
+            />
           </Paper>
 
           <Paper sx={{ p: 3 }}>
             <Typography variant="h6" className="text-gradient" sx={{ mb: 2, fontWeight: "bold" }}>Sessions</Typography>
             <ArrayField source="sessions">
-              <Datagrid 
-                bulkActionButtons={false} 
+              <Datagrid
+                bulkActionButtons={false}
                 rowClick={(id) => `/sessions/${id}/show`}
                 empty={<EmptySessions />}
                 sx={{

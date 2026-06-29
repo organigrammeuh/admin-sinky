@@ -11,7 +11,7 @@ import {
 import { Box, Typography } from "@mui/material";
 
 export const SpeakerCreate = () => (
-  <Create>
+  <Create redirect="list">
     <SimpleForm sx={{ maxWidth: 600, p: 4 }}>
       <Typography variant="h5" className="text-gradient" color="primary" sx={{ fontWeight: "bold", mb: 3 }}>
         Créer un Speaker
@@ -44,7 +44,7 @@ export const SpeakerCreate = () => (
       </Typography>
       <ArrayInput source="socialLinks">
         <SimpleFormIterator sx={{ gap: 1 }}>
-          <TextInput label="URL" source="" fullWidth />
+          <TextInput label="URL" fullWidth />
         </SimpleFormIterator>
       </ArrayInput>
     </SimpleForm>

@@ -1,10 +1,28 @@
 import { ReferenceManyField, Datagrid, Show, SimpleShowLayout, ReferenceField, TextField } from "react-admin";
 import { Box, Paper, Typography } from "@mui/material";
 import { EmptySessions } from "../sessions/SessionNotFound";
+import { ArrowBack } from "@mui/icons-material";
+
+const BackToRoomList = () => {
+  return (
+    <Button
+      component={Link}
+      to={`/rooms`}
+      startIcon={<ArrowBack />}
+      variant="outlined"
+      size="small"
+      sx={{ mb: 2 }}
+    >
+      Back to roms list
+    </Button>
+  );
+};
+
 
 export const RoomShow = () => (
   <Show sx={{ "& .RaShow-card": { background: "transparent", boxShadow: "none" } }}>
     <SimpleShowLayout>
+      <BackToRoomList />
       <Box sx={{ display: "flex", flexDirection: "column", gap: 3, width: "100%", mt: 1 }}>
         <Paper sx={{ p: 3 }}>
           <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold", mb: 0.5 }}>NOM DE LA SALLE</Typography>
@@ -21,8 +39,8 @@ export const RoomShow = () => (
         <Paper sx={{ p: 3 }}>
           <Typography variant="h6" className="text-gradient" sx={{ mb: 2, fontWeight: "bold" }}>Sessions Associées</Typography>
           <ReferenceManyField reference="sessions" target="roomId" label="">
-            <Datagrid 
-              bulkActionButtons={false} 
+            <Datagrid
+              bulkActionButtons={false}
               rowClick={(id) => `/sessions/${id}/show`}
               empty={<EmptySessions />}
               sx={{
