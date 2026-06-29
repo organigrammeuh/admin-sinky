@@ -25,11 +25,9 @@ export const SpeakerShow = () => (
                   sx={{
                     width: 150,
                     height: 150,
-                    borderRadius: "50%",
                     objectFit: "cover",
                     border: "4px solid",
                     borderColor: "primary.main",
-                    boxShadow: (theme) => theme.palette.mode === "dark" ? "0px 0px 20px rgba(59, 130, 246, 0.4)" : "none",
                     mb: 2
                   }}
                 />
