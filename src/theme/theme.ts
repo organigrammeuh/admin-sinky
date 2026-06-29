@@ -2,56 +2,70 @@ import { defaultTheme } from "react-admin";
 import { createTheme } from "@mui/material/styles";
 
 const commonComponents = {
-    MuiPaper: {
-        styleOverrides: {
-            root: {
-                borderRadius: "16px",
-                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-            },
-        },
+  MuiPaper: {
+    styleOverrides: {
+      root: {
+        borderRadius: 0,
+        boxShadow: "none",
+      },
     },
-    MuiButton: {
-        styleOverrides: {
-            root: {
-                borderRadius: "8px",
-                textTransform: "none" as const,
-                fontWeight: 600,
-            },
-        },
+  },
+  MuiButton: {
+    styleOverrides: {
+      root: {
+        borderRadius: "10px",
+        textTransform: "none" as const,
+        fontWeight: 600,
+        paddingBlock: 10,
+        paddingInline: 24,
+      },
     },
-    MuiTypography: {
-        styleOverrides: {
-            root: {
-                "&.text-gradient": {
-                    backgroundImage: "linear-gradient(to right, #d946ef, #3b82f6, #06b6d4)",
-                    backgroundClip: "text",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    color: "transparent",
-                    display: "inline-block",
-                },
-            },
+  },
+  MuiTypography: {
+    styleOverrides: {
+      root: {
+        "&.text-gradient": {
+          backgroundImage:
+            "linear-gradient(to right, #d946ef, #3b82f6, #06b6d4)",
+          backgroundClip: "text",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          color: "transparent",
+          display: "inline-block",
         },
+      },
     },
+  },
 };
 
 export const lightTheme = createTheme({
-    ...defaultTheme,
-    palette: {
-        mode: "light",
-        primary: { main: "#3b82f6" },
-        secondary: { main: "#a855f7" },
+  ...defaultTheme,
+  palette: {
+    mode: "light",
+    primary: { main: "#594fd7", contrastText: "#ffffff" },
+    secondary: { main: "#576be8", contrastText: "#ffffff" },
+    error: { main: "#df2225" },
+    success: { main: "#00a327" },
+    background: {
+      default: "#f1f1f5",
+      paper: "#ffffff",
     },
-    components: {
-        ...commonComponents,
-        MuiAppBar: {
-            styleOverrides: {
-                colorSecondary: {
-                    backgroundColor: "#ffffff",
-                    color: "#1f2937",
-                    boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.05)",
-                },
-            },
+    text: {
+      primary: "#080811",
+      secondary: "#61626f",
+    },
+    divider: "#d5d7e2",
+  },
+  typography: {
+    fontFamily: '"DM Sans", sans-serif',
+  },
+  components: {
+    ...commonComponents,
+    MuiAppBar: {
+      styleOverrides: {
+        colorSecondary: {
+          backgroundColor: "#ffffff",
+          color: "#080811",
         },
       MuiCssBaseline: {
         styleOverrides: {
@@ -61,44 +75,48 @@ export const lightTheme = createTheme({
         },
       },
     },
+  },
 });
 
 export const darkTheme = createTheme({
-    ...defaultTheme,
-    palette: {
-        mode: "dark",
-        primary: { main: "#3b82f6" },
-        secondary: { main: "#a855f7" },
-        background: {
-            default: "#09090e",
-            paper: "#131322",
-        },
-        text: {
-            primary: "#f3f4f6",
-            secondary: "#9ca3af",
-        },
+  ...defaultTheme,
+  palette: {
+    mode: "dark",
+    primary: { main: "#7d7df9", contrastText: "#020202" },
+    secondary: { main: "#c16dcc", contrastText: "#020202" },
+    error: { main: "#ff6367" },
+    success: { main: "#39c34b" },
+    background: {
+      default: "#020202",
+      paper: "#07070b",
     },
-    components: {
-        ...commonComponents,
-        MuiPaper: {
-            styleOverrides: {
-                root: {
-                    ...commonComponents.MuiPaper.styleOverrides.root,
-                    backgroundColor: "#131322",
-                    border: "1px solid rgba(255, 255, 255, 0.05)",
-                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.4)",
-                },
-            },
+    text: {
+      primary: "#f2f2f2",
+      secondary: "#797a80",
+    },
+    divider: "rgba(255, 255, 255, 0.09)",
+  },
+  typography: {
+    fontFamily: '"DM Sans", sans-serif',
+  },
+  components: {
+    ...commonComponents,
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          ...commonComponents.MuiPaper.styleOverrides.root,
+          backgroundColor: "#07070b",
+          border: "1px solid rgba(255, 255, 255, 0.08)",
         },
-        MuiTableCell: {
-            styleOverrides: {
-                root: { borderBottom: "1px solid rgba(255, 255, 255, 0.05)" },
-                head: {
-                    backgroundColor: "#1a1a32",
-                    color: "#a855f7",
-                    fontWeight: "bold"
-                },
-            },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: { borderBottom: "1px solid rgba(255, 255, 255, 0.09)" },
+        head: {
+          backgroundColor: "#111116",
+          color: "#c16dcc",
+          fontWeight: "bold",
         },
       MuiCssBaseline: {
         styleOverrides: {
@@ -108,4 +126,5 @@ export const darkTheme = createTheme({
         },
       },
     },
+  },
 });

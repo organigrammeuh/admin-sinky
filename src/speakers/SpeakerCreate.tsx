@@ -11,7 +11,7 @@ import {
 import { Box, Typography } from "@mui/material";
 
 export const SpeakerCreate = () => (
-  <Create>
+  <Create redirect="list">
     <SimpleForm sx={{ maxWidth: 600, p: 4 }}>
       <Typography variant="h5" className="text-gradient" color="primary" sx={{ fontWeight: "bold", mb: 3 }}>
         Créer un Speaker
@@ -23,7 +23,6 @@ export const SpeakerCreate = () => (
       <Box sx={{ 
         width: "100%", 
         border: "2px dashed rgba(168, 85, 247, 0.4)", 
-        borderRadius: "12px", 
         p: 2, 
         mb: 3,
         backgroundColor: "rgba(168, 85, 247, 0.02)",
@@ -35,7 +34,7 @@ export const SpeakerCreate = () => (
           accept={{ "image/*": [] }}
           validate={[required()]}
         >
-          <ImageField source="src" title="title" sx={{ "& img": { borderRadius: "8px", maxHeight: 150 } }} />
+          <ImageField source="src" title="title" sx={{ "& img": { maxHeight: 150 } }} />
         </ImageInput>
       </Box>
 
@@ -44,7 +43,7 @@ export const SpeakerCreate = () => (
       </Typography>
       <ArrayInput source="socialLinks">
         <SimpleFormIterator sx={{ gap: 1 }}>
-          <TextInput label="URL" source="" fullWidth />
+          <TextInput label="URL" fullWidth />
         </SimpleFormIterator>
       </ArrayInput>
     </SimpleForm>
