@@ -1,16 +1,18 @@
 import {
-  DataTable,
+  Datagrid,
   DateField,
   DateInput,
   DeleteButton,
   EditButton,
   List,
+  ReferenceField,
   TextInput,
+  TextField,
 } from "react-admin";
 
 const eventFilters = [
   <TextInput source="title" label="Search by title" alwaysOn />,
-  <TextInput source="location" label="Search by location" alwaysOn />,
+  <TextInput source="idLocation" label="Search by location ID" alwaysOn />,
   <DateInput source="start_date" label="After" alwaysOn />,
   <DateInput
     alwaysOn
@@ -27,19 +29,30 @@ const eventFilters = [
 ];
 
 export const EventList = () => (
-  <List filters={eventFilters}>
-    <DataTable rowClick={"show"}>
-      <DataTable.Col source="id" />
-      <DataTable.Col source="title" />
-      <DataTable.Col source="startDate">
-        <DateField source="startDate" locales="en-US" />
-      </DataTable.Col>
-      <DataTable.Col source="endDate">
-        <DateField source="endDate" locales="en-US" />
-      </DataTable.Col>
-      <DataTable.Col source="location" />
-      <EditButton />
-      <DeleteButton />
-    </DataTable>
+  <List filters={eventFilters} sx={{ "& .RaList-main": { marginTop: 2 } }}>
+    <Datagrid 
+      rowClick="show" 
+      bulkActionButtons={false}
+      sx={{
+        "& .MuiTableRow-root:nth-of-type(odd)": {
+          backgroundColor: (theme) => theme.palette.background.paper,
+        },
+        "& .MuiTableRow-root:nth-of-type(even)": {
+          backgroundColor: (theme) => theme.palette.mode === "dark" ? "#0b0b14" : "#f9fafb",
+        },
+        "& .MuiTableRow-root:hover": {
+          backgroundColor: (theme) => theme.palette.mode === "dark" ? "rgba(168, 85, 247, 0.08) !important" : "rgba(59, 130, 246, 0.04) !important",
+        }
+      }}
+    >
+      <TextField source="title" label="Title" sx={{ fontWeight: "bold", color: "primary.main" }} />
+      <DateField source="startDate" label="Start Date" locales="en-US" />
+      <DateField source="endDate" label="End Date" locales="en-US" />
+      <ReferenceField source="idLocation" reference="locations" label="Location">
+        <TextField source="name" />
+      </ReferenceField>
+      <EditButton color="primary" />
+      <DeleteButton color="error" />
+    </Datagrid>
   </List>
 );

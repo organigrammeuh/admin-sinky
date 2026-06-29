@@ -8,23 +8,42 @@ import {
   TextInput,
   required,
 } from "react-admin";
+import { Box, Typography } from "@mui/material";
 
 export const SpeakerCreate = () => (
-  <Create>
-    <SimpleForm>
-      <TextInput source="fullName" validate={[required()]} />
-      <TextInput source="bio" validate={[required()]} multiline />
-      <ImageInput
-        source="profilePicture"
-        label="Photo de profil"
-        accept={{ "image/*": [] }}
-        validate={[required()]}
-      >
-        <ImageField source="src" title="title" />
-      </ImageInput>
+  <Create redirect="list">
+    <SimpleForm sx={{ maxWidth: 600, p: 4 }}>
+      <Typography variant="h5" className="text-gradient" color="primary" sx={{ fontWeight: "bold", mb: 3 }}>
+        Create a Speaker
+      </Typography>
+
+      <TextInput source="fullName" validate={[required()]} fullWidth sx={{ mb: 2 }} />
+      <TextInput source="bio" validate={[required()]} multiline rows={4} fullWidth sx={{ mb: 2 }} />
+      
+      <Box sx={{ 
+        width: "100%", 
+        border: "2px dashed rgba(168, 85, 247, 0.4)", 
+        p: 2, 
+        mb: 3,
+        backgroundColor: "rgba(168, 85, 247, 0.02)",
+        "&:hover": { borderColor: "#a855f7" }
+      }}>
+        <ImageInput
+          source="profilePicture"
+          label="Profile Picture"
+          accept={{ "image/*": [] }}
+          validate={[required()]}
+        >
+          <ImageField source="src" title="title" sx={{ "& img": { maxHeight: 150 } }} />
+        </ImageInput>
+      </Box>
+
+      <Typography variant="subtitle2" color="textSecondary" sx={{ mb: 1, fontWeight: "bold" }}>
+        Social Media Links
+      </Typography>
       <ArrayInput source="socialLinks">
-        <SimpleFormIterator>
-          <TextInput label="URL" source={""} />
+        <SimpleFormIterator sx={{ gap: 1 }}>
+          <TextInput label="URL" fullWidth />
         </SimpleFormIterator>
       </ArrayInput>
     </SimpleForm>
