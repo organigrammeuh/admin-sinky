@@ -4,6 +4,8 @@ import {
   EditButton,
   List,
   ReferenceField,
+  ReferenceInput,
+  SelectInput,
   TextInput,
   TextField,
 } from "react-admin";
@@ -11,7 +13,16 @@ import { Box } from "@mui/material";
 
 const roomFilters = [
   <TextInput source="name" label="Search by name" alwaysOn />,
-  <TextInput source="idLocation" label="Search by location ID" alwaysOn />,
+  <ReferenceInput source="idLocation" reference="locations" alwaysOn>
+    <SelectInput
+      optionText={(record: any) =>
+        record?.name
+          ? `${record.name} - ${record.city}, ${record.country}`
+          : `${record.city}, ${record.country}`
+      }
+      label="Location"
+    />
+  </ReferenceInput>,
 ];
 
 export const RoomList = () => (
@@ -31,7 +42,7 @@ export const RoomList = () => (
         }
       }}
     >
-      <TextField source="name" label="Nom" sx={{ fontWeight: "bold", color: "primary.main" }} />
+      <TextField source="name" label="Name" sx={{ fontWeight: "bold", color: "primary.main" }} />
       <ReferenceField source="idLocation" reference="locations" label="Location">
         <TextField source="name" />
       </ReferenceField>

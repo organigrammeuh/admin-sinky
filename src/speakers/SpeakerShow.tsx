@@ -62,7 +62,7 @@ export const SpeakerShow = () => (
 
           <Paper sx={{ p: 3 }}>
             <Typography variant="h6" className="text-gradient" sx={{ mb: 1, fontWeight: "bold" }}>
-              Réseaux Sociaux
+              Social Networks
             </Typography>
 
             <FunctionField
@@ -70,7 +70,7 @@ export const SpeakerShow = () => (
                 if (!record?.socialLinks || !Array.isArray(record.socialLinks)) {
                   return (
                     <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-                      Aucun lien disponible
+                      No link available
                     </Typography>
                   );
                 }

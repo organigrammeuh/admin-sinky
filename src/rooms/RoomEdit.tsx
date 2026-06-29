@@ -5,7 +5,7 @@ export const RoomEdit = () => (
   <Edit redirect="show">
     <SimpleForm sx={{ maxWidth: 600, p: 4 }}>
       <Typography variant="h5" className="text-gradient" sx={{ fontWeight: "bold", mb: 3 }}>
-        Modifier la Salle
+        Edit Room
       </Typography>
       <TextInput source="name" validate={[required()]} fullWidth sx={{ mb: 2 }} />
       <ReferenceInput source="idLocation" reference="locations" fullWidth>
