@@ -12,7 +12,7 @@ import {
   TextInput,
 } from "react-admin";
 import { useSearchParams } from "react-router-dom";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 export const SessionEdit = () => {
   const [searchParams] = useSearchParams();
@@ -23,10 +23,21 @@ export const SessionEdit = () => {
       transform={(data) => ({ ...data, eventId })}
       redirect={eventId ? `/events/${eventId}/show` : false}
     >
-      <SimpleForm sx={{ maxWidth: 600, p: 4 }}>
-        <Typography variant="h5" className="text-gradient" sx={{ fontWeight: "bold", mb: 3 }}>
-          Modifier la Session
-        </Typography>
+      <SimpleForm
+        sx={{
+          maxWidth: 600,
+          "& .MuiPaper-root": {
+            bgcolor: "background.paper",
+            border: "1px solid",
+            borderColor: "divider",
+            borderRadius: "12px",
+          },
+        }}
+      >
+        <Box sx={{ px: 3, pt: 3, pb: 1 }}>
+          <Typography sx={{ fontWeight: 700, fontSize: "1.2rem", mb: 3 }}>
+            Edit session
+          </Typography>
         <TextInput source="title" validate={[required()]} fullWidth sx={{ mb: 2 }} />
         <TextInput source="description" validate={[required()]} multiline rows={4} fullWidth sx={{ mb: 2 }} />
         <DateTimeInput source="startTime" validate={[required()]} fullWidth sx={{ mb: 2 }} />
@@ -38,6 +49,7 @@ export const SessionEdit = () => {
         <ReferenceArrayInput source="speakerIds" reference="speakers">
           <SelectArrayInput optionText="fullName" label="Speakers" fullWidth sx={{ mb: 2 }} />
         </ReferenceArrayInput>
+        </Box>
       </SimpleForm>
     </Edit>
   );

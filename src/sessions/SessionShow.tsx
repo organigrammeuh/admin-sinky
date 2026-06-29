@@ -34,7 +34,7 @@ export const SessionShow = () => (
     <SimpleShowLayout>
       <BackToEventButton />
       <Box sx={{ display: "flex", flexDirection: "column", gap: 3, width: "100%", mt: 1 }}>
-        <Paper sx={{ p: 3 }}>
+        <Paper sx={{ p: 3, borderRadius: "12px" }}>
           <TextField source="title" variant="h4" className="text-gradient" sx={{ fontWeight: "800", mb: 2, display: "block" }} />
           <TextField source="description" sx={{ lineHeight: 1.6, display: "block", mb: 3 }} />
 
@@ -50,7 +50,7 @@ export const SessionShow = () => (
           </Box>
         </Paper>
 
-        <Paper sx={{ p: 3 }}>
+        <Paper sx={{ p: 3, borderRadius: "12px" }}>
           <Typography variant="h6" className="text-gradient" sx={{ mb: 2, fontWeight: "bold" }}>Intervenants de la Session</Typography>
           <ArrayField source="speakers">
             <Datagrid
