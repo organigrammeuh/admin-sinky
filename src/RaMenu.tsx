@@ -5,6 +5,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { LocationCity } from "@mui/icons-material";
 
 export const RaMenu = () => {
   const logout = useLogout();
@@ -32,6 +33,11 @@ export const RaMenu = () => {
             to="/rooms"
             primaryText="Rooms"
             leftIcon={<MeetingRoomIcon />}
+          />
+          <Menu.Item
+            to="/locations"
+            primaryText="Locations"
+            leftIcon={< LocationCity/>}
           />
         </Box>
         <Menu.Item
