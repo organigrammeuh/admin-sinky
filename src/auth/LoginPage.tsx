@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { useLogin, useNotify, Notification } from "react-admin";
-import { Box, TextField, Button, CircularProgress, Typography, Divider } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  CircularProgress,
+  Typography,
+  Divider,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL || "/api";
@@ -68,7 +75,9 @@ export const LoginPage = () => {
         <Button
           variant="outlined"
           fullWidth
-          onClick={() => (window.location.href = `${API_URL}/auth/google/redirect`)}
+          onClick={() =>
+            (window.location.href = `${API_URL}/auth/google/redirect`)
+          }
         >
           Sign in with Google
         </Button>
@@ -76,7 +85,9 @@ export const LoginPage = () => {
         <Button
           variant="outlined"
           fullWidth
-          onClick={() => (window.location.href = `${API_URL}/auth/github/redirect`)}
+          onClick={() =>
+            (window.location.href = `${API_URL}/auth/github/redirect`)
+          }
         >
           Sign in with GitHub
         </Button>

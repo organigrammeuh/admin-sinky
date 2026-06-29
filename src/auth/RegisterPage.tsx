@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { useNotify, Notification } from "react-admin";
-import { Box, TextField, Button, CircularProgress, Typography, Divider } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  CircularProgress,
+  Typography,
+  Divider,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { authProvider } from "./authProvider";
 
@@ -91,7 +98,9 @@ export const RegisterPage = () => {
         <Button
           variant="outlined"
           fullWidth
-          onClick={() => (window.location.href = `${API_URL}/auth/google/redirect`)}
+          onClick={() =>
+            (window.location.href = `${API_URL}/auth/google/redirect`)
+          }
         >
           Sign up with Google
         </Button>
@@ -99,7 +108,9 @@ export const RegisterPage = () => {
         <Button
           variant="outlined"
           fullWidth
-          onClick={() => (window.location.href = `${API_URL}/auth/github/redirect`)}
+          onClick={() =>
+            (window.location.href = `${API_URL}/auth/github/redirect`)
+          }
         >
           Sign up with GitHub
         </Button>

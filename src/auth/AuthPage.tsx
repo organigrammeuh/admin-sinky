@@ -4,5 +4,9 @@ import { RegisterPage } from "./RegisterPage";
 
 export const AuthPage = () => {
   const [searchParams] = useSearchParams();
-  return searchParams.get("mode") === "register" ? <RegisterPage /> : <LoginPage />;
+  return searchParams.get("mode") === "register" ? (
+    <RegisterPage />
+  ) : (
+    <LoginPage />
+  );
 };
