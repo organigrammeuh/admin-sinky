@@ -23,7 +23,6 @@ export const SpeakerCreate = () => (
       <Box sx={{ 
         width: "100%", 
         border: "2px dashed rgba(168, 85, 247, 0.4)", 
-        borderRadius: "12px", 
         p: 2, 
         mb: 3,
         backgroundColor: "rgba(168, 85, 247, 0.02)",
@@ -35,7 +34,7 @@ export const SpeakerCreate = () => (
           accept={{ "image/*": [] }}
           validate={[required()]}
         >
-          <ImageField source="src" title="title" sx={{ "& img": { borderRadius: "8px", maxHeight: 150 } }} />
+          <ImageField source="src" title="title" sx={{ "& img": { maxHeight: 150 } }} />
         </ImageInput>
       </Box>
 

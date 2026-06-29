@@ -5,17 +5,19 @@ const commonComponents = {
     MuiPaper: {
         styleOverrides: {
             root: {
-                borderRadius: "16px",
-                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+                borderRadius: 0,
+                boxShadow: "none",
             },
         },
     },
     MuiButton: {
         styleOverrides: {
             root: {
-                borderRadius: "8px",
+                borderRadius: "10px",
                 textTransform: "none" as const,
                 fontWeight: 600,
+                paddingBlock: 10,
+                paddingInline: 24,
             },
         },
     },
@@ -42,6 +44,9 @@ export const lightTheme = createTheme({
         primary: { main: "#3b82f6" },
         secondary: { main: "#a855f7" },
     },
+    typography: {
+        fontFamily: '"DM Sans", sans-serif',
+    },
     components: {
         ...commonComponents,
         MuiAppBar: {
@@ -49,7 +54,6 @@ export const lightTheme = createTheme({
                 colorSecondary: {
                     backgroundColor: "#ffffff",
                     color: "#1f2937",
-                    boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.05)",
                 },
             },
         },
@@ -71,6 +75,9 @@ export const darkTheme = createTheme({
             secondary: "#9ca3af",
         },
     },
+    typography: {
+        fontFamily: '"DM Sans", sans-serif',
+    },
     components: {
         ...commonComponents,
         MuiPaper: {
@@ -79,7 +86,6 @@ export const darkTheme = createTheme({
                     ...commonComponents.MuiPaper.styleOverrides.root,
                     backgroundColor: "#131322",
                     border: "1px solid rgba(255, 255, 255, 0.05)",
-                    boxShadow: "0 4px 30px rgba(0, 0, 0, 0.4)",
                 },
             },
         },
