@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Admin, Resource } from "react-admin";
 import { Layout } from "./Layout";
 import dataProvider from "./dataProvider";
@@ -20,26 +20,38 @@ import { RoomEdit } from "./rooms/RoomEdit";
 import { darkTheme, lightTheme } from "./theme/theme";
 import authProvider from "./auth/authProvider";
 import { AuthPage } from "./auth/AuthPage";
+import { queryClient } from "./queryClient";
 import Cookies from "js-cookie";
 
 const OAuthHandler = ({ children }: { children: ReactNode }) => {
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const accessToken = params.get("accessToken");
-    const userParam = params.get("user");
+  const params = new URLSearchParams(window.location.search);
+  const accessToken = params.get("accessToken");
 
-    if (accessToken) {
-      Cookies.set("auth_token", accessToken, { expires: 1 });
-      if (userParam) {
-        try {
-          Cookies.set("user", userParam, { expires: 1 });
-        } catch {
-          // ignore
-        }
-      }
-      window.location.href = "/";
+  if (accessToken) {
+    const userParam = params.get("user");
+    const refreshTokenParam = params.get("refreshToken");
+    Cookies.remove("auth_token", { path: "/" });
+    Cookies.remove("user", { path: "/" });
+    Cookies.remove("refresh_token", { path: "/" });
+    Cookies.set("auth_token", accessToken, {
+      expires: 1,
+      secure: true,
+      path: "/",
+    });
+    if (userParam) {
+      Cookies.set("user", userParam, { expires: 1, path: "/" });
     }
-  }, []);
+    if (refreshTokenParam) {
+      Cookies.set("refresh_token", refreshTokenParam, {
+        expires: 7,
+        secure: true,
+        path: "/",
+      });
+    }
+    queryClient.clear();
+    window.location.href = "/";
+    return null;
+  }
 
   return <>{children}</>;
 };
@@ -47,6 +59,7 @@ const OAuthHandler = ({ children }: { children: ReactNode }) => {
 export const App = () => (
   <OAuthHandler>
     <Admin
+      queryClient={queryClient}
       theme={lightTheme}
       darkTheme={darkTheme}
       layout={Layout}

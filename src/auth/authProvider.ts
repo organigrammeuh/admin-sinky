@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { queryClient } from "../queryClient";
 
 const API_URL = import.meta.env.VITE_API_URL || "/api";
 
@@ -15,12 +16,21 @@ export const authProvider = {
       throw new Error("Invalid credentials");
     }
 
-    const { accessToken, user } = await response.json();
+    const { accessToken, refreshToken, user } = await response.json();
 
-    Cookies.set("auth_token", accessToken, { expires: 1, secure: true });
-    Cookies.set("user", JSON.stringify(user), { expires: 1 });
-
-    return Promise.resolve();
+    Cookies.set("auth_token", accessToken, {
+      expires: 1,
+      secure: true,
+      path: "/",
+    });
+    Cookies.set("user", JSON.stringify(user), { expires: 1, path: "/" });
+    if (refreshToken) {
+      Cookies.set("refresh_token", refreshToken, {
+        expires: 7,
+        secure: true,
+        path: "/",
+      });
+    }
   },
 
   register: async ({
@@ -41,10 +51,19 @@ export const authProvider = {
     return res.json();
   },
 
-  logout: () => {
-    Cookies.remove("auth_token");
-    Cookies.remove("user");
-    return Promise.resolve();
+  logout: async () => {
+    try {
+      await fetch(`${API_URL}/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch {
+      // On supprime les cookies quoi qu'il arrive
+    }
+    Cookies.remove("auth_token", { path: "/" });
+    Cookies.remove("user", { path: "/" });
+    Cookies.remove("refresh_token", { path: "/" });
+    queryClient.clear();
   },
 
   checkAuth: () => {
@@ -54,13 +73,41 @@ export const authProvider = {
       : Promise.reject({ message: "Login required" });
   },
 
-  checkError: ({ status }: { status: number }) => {
-    if (status === 401 || status === 403) {
-      Cookies.remove("auth_token");
-      Cookies.remove("user");
-      return Promise.reject(); // force logout + redirect to login
+  checkError: async ({ status }: { status: number }) => {
+    if (status !== 401 && status !== 403) return;
+
+    try {
+      const refreshToken = Cookies.get("refresh_token");
+      const res = await fetch(`${API_URL}/auth/refresh`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ refreshToken }),
+      });
+
+      if (!res.ok) throw new Error("Refresh failed");
+
+      const { accessToken, refreshToken: newRefreshToken } = await res.json();
+      Cookies.set("auth_token", accessToken, {
+        expires: 1,
+        secure: true,
+        path: "/",
+      });
+      if (newRefreshToken) {
+        Cookies.set("refresh_token", newRefreshToken, {
+          expires: 7,
+          secure: true,
+          path: "/",
+        });
+      }
+      return;
+    } catch {
+      Cookies.remove("auth_token", { path: "/" });
+      Cookies.remove("user", { path: "/" });
+      Cookies.remove("refresh_token", { path: "/" });
+      queryClient.clear();
+      throw new Error("Session expired");
     }
-    return Promise.resolve(); // keep the user logged in
   },
 
   getIdentity: () => {
