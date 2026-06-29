@@ -17,9 +17,18 @@ import { RoomShow } from "./rooms/RoomShow";
 import { RoomCreate } from "./rooms/RoomCreate";
 import { RoomEdit } from "./rooms/RoomEdit";
 import { darkTheme, lightTheme } from "./theme/theme";
+import authProvider from "./authProvider";
+import { LoginPage } from "./LoginPage";
 
 export const App = () => (
-  <Admin theme={lightTheme} darkTheme={darkTheme} layout={Layout} dataProvider={dataProvider}>
+  <Admin
+    theme={lightTheme} 
+    darkTheme={darkTheme}
+    layout={Layout}
+    authProvider={authProvider}
+    dataProvider={dataProvider}
+    loginPage={LoginPage}
+  >
     <Resource
       name="events"
       create={EventCreate}
