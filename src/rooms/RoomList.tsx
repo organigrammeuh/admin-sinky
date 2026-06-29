@@ -3,6 +3,7 @@ import {
   DeleteButton,
   EditButton,
   List,
+  ReferenceField,
   TextInput,
   TextField,
 } from "react-admin";
@@ -10,6 +11,7 @@ import { Box } from "@mui/material";
 
 const roomFilters = [
   <TextInput source="name" label="Search by name" alwaysOn />,
+  <TextInput source="idLocation" label="Search by location ID" alwaysOn />,
 ];
 
 export const RoomList = () => (
@@ -30,6 +32,9 @@ export const RoomList = () => (
       }}
     >
       <TextField source="name" label="Nom" sx={{ fontWeight: "bold", color: "primary.main" }} />
+      <ReferenceField source="idLocation" reference="locations" label="Location">
+        <TextField source="name" />
+      </ReferenceField>
       <Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end" }}>
         <EditButton color="primary" />
         <DeleteButton color="error" />

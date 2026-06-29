@@ -5,13 +5,14 @@ import {
   DeleteButton,
   EditButton,
   List,
+  ReferenceField,
   TextInput,
   TextField,
 } from "react-admin";
 
 const eventFilters = [
   <TextInput source="title" label="Search by title" alwaysOn />,
-  <TextInput source="location" label="Search by location" alwaysOn />,
+  <TextInput source="idLocation" label="Search by location ID" alwaysOn />,
   <DateInput source="start_date" label="After" alwaysOn />,
   <DateInput
     alwaysOn
@@ -47,7 +48,9 @@ export const EventList = () => (
       <TextField source="title" label="Titre" sx={{ fontWeight: "bold", color: "primary.main" }} />
       <DateField source="startDate" label="Date de début" locales="en-US" />
       <DateField source="endDate" label="Date de fin" locales="en-US" />
-      <TextField source="location" label="Lieu" />
+      <ReferenceField source="idLocation" reference="locations" label="Lieu">
+        <TextField source="name" />
+      </ReferenceField>
       <EditButton color="primary" />
       <DeleteButton color="error" />
     </Datagrid>

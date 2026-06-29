@@ -6,6 +6,7 @@ import {
   ReferenceManyField,
   Datagrid,
   FunctionField,
+  ReferenceField,
   useRecordContext,
   DeleteButton,
 } from "react-admin";
@@ -122,7 +123,7 @@ const SessionsSection = () => {
             </Box>
             <Box>
               <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>LIEU</Typography>
-              <TextField source="location" sx={{ fontWeight: "500", color: "secondary.main" }} />
+              <ReferenceField source="idLocation" reference="locations" sx={{ fontWeight: "500", color: "secondary.main"}}  />
             </Box>
           </Box>
         </Paper>
