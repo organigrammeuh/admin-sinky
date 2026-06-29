@@ -32,7 +32,7 @@ export const SpeakerShow = () => (
       <BackToSpeakerList />
       <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 4, mt: 2, width: "100%" }}>
 
-        <Paper sx={{ p: 3, display: "flex", flexDirection: "column", alignItems: "center", minWidth: 250, height: "fit-content" }}>
+        <Paper sx={{ p: 3, display: "flex", flexDirection: "column", alignItems: "center", minWidth: 250, height: "fit-content", borderRadius: "12px" }}>
           <FunctionField
             render={(record) =>
               record.profilePicture?.src ? (
@@ -55,12 +55,12 @@ export const SpeakerShow = () => (
         </Paper>
 
         <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 3 }}>
-          <Paper sx={{ p: 3 }}>
+          <Paper sx={{ p: 3, borderRadius: "12px" }}>
             <Typography variant="h6" className="text-gradient" sx={{ mb: 1, fontWeight: "bold" }}>Biographie</Typography>
             <TextField source="bio" sx={{ lineHeight: 1.6, display: "block" }} />
           </Paper>
 
-          <Paper sx={{ p: 3 }}>
+          <Paper sx={{ p: 3, borderRadius: "12px" }}>
             <Typography variant="h6" className="text-gradient" sx={{ mb: 1, fontWeight: "bold" }}>
               Social Networks
             </Typography>
@@ -114,7 +114,7 @@ export const SpeakerShow = () => (
             />
           </Paper>
 
-          <Paper sx={{ p: 3 }}>
+          <Paper sx={{ p: 3, borderRadius: "12px" }}>
             <Typography variant="h6" className="text-gradient" sx={{ mb: 2, fontWeight: "bold" }}>Sessions</Typography>
             <ArrayField source="sessions">
               <Datagrid
