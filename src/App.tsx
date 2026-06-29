@@ -22,6 +22,7 @@ import authProvider from "./auth/authProvider";
 import { AuthPage } from "./auth/AuthPage";
 import { queryClient } from "./queryClient";
 import Cookies from "js-cookie";
+import { MyAppBar } from "./MyAppBar";
 
 const OAuthHandler = ({ children }: { children: ReactNode }) => {
   const params = new URLSearchParams(window.location.search);
