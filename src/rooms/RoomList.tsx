@@ -31,7 +31,7 @@ export const RoomList = () => (
         }
       }}
     >
-      <TextField source="name" label="Nom" sx={{ fontWeight: "bold", color: "primary.main" }} />
+      <TextField source="name" label="Name" sx={{ fontWeight: "bold", color: "primary.main" }} />
       <ReferenceField source="idLocation" reference="locations" label="Location">
         <TextField source="name" />
       </ReferenceField>

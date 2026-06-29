@@ -55,7 +55,7 @@ const SessionsSection = () => {
     <Paper sx={{ p: 3, mt: 3, width: "100%" }}>
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
         <Typography variant="h6" className="text-gradient" sx={{ fontWeight: "bold" }}>
-          Sessions Planifiées
+          Scheduled Sessions
         </Typography>
         <CreateSessionButton />
       </Box>
@@ -114,15 +114,15 @@ const SessionsSection = () => {
 
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 4, borderTop: "1px solid", borderColor: "divider", pt: 2 }}>
             <Box>
-              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>DATE DE DÉBUT</Typography>
+              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>START DATE</Typography>
               <DateField source="startDate" sx={{ fontWeight: "500" }} />
             </Box>
             <Box>
-              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>DATE DE FIN</Typography>
+              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>END DATE</Typography>
               <DateField source="endDate" sx={{ fontWeight: "500" }} />
             </Box>
             <Box>
-              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>LIEU</Typography>
+              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>LOCATION</Typography>
               <ReferenceField source="idLocation" reference="locations" sx={{ fontWeight: "500", color: "secondary.main"}}  />
             </Box>
           </Box>

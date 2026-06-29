@@ -14,7 +14,7 @@ export const SpeakerEdit = () => (
   <Edit>
     <SimpleForm sx={{ maxWidth: 600, p: 4 }}>
       <Typography variant="h5" className="text-gradient" color="primary" sx={{ fontWeight: "bold", mb: 3 }}>
-        Modifier le Speaker
+        Edit Speaker
       </Typography>
 
       <TextInput source="fullName" validate={[required()]} fullWidth sx={{ mb: 2 }} />
@@ -30,7 +30,7 @@ export const SpeakerEdit = () => (
       }}>
         <ImageInput
           source="profilePicture"
-          label="Photo de profil"
+          label="Profile Picture"
           accept={{ "image/*": [] }}
           validate={[required()]}
         >
@@ -39,7 +39,7 @@ export const SpeakerEdit = () => (
       </Box>
 
       <Typography variant="subtitle2" color="textSecondary" sx={{ mb: 1, fontWeight: "bold" }}>
-        Liens de réseaux sociaux
+        Social Media Links
       </Typography>
       <ArrayInput source="socialLinks">
         <SimpleFormIterator sx={{ gap: 1 }}>

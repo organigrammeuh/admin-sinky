@@ -40,18 +40,18 @@ export const SessionShow = () => (
 
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 4, borderTop: "1px solid", borderColor: "divider", pt: 2 }}>
             <Box>
-              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>HORAIRE DE DÉBUT</Typography>
+              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>START TIME</Typography>
               <DateField source="startTime" showTime sx={{ fontWeight: "500" }} />
             </Box>
             <Box>
-              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>HORAIRE DE FIN</Typography>
+              <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold" }}>END TIME</Typography>
               <DateField source="endTime" showTime sx={{ fontWeight: "500" }} />
             </Box>
           </Box>
         </Paper>
 
         <Paper sx={{ p: 3 }}>
-          <Typography variant="h6" className="text-gradient" sx={{ mb: 2, fontWeight: "bold" }}>Intervenants de la Session</Typography>
+          <Typography variant="h6" className="text-gradient" sx={{ mb: 2, fontWeight: "bold" }}>Session Speakers</Typography>
           <ArrayField source="speakers">
             <Datagrid
               bulkActionButtons={false}
@@ -62,7 +62,7 @@ export const SessionShow = () => (
                 "& .MuiTableRow-root:hover": { backgroundColor: (theme) => theme.palette.mode === "dark" ? "rgba(168, 85, 247, 0.08) !important" : "rgba(59, 130, 246, 0.04) !important" }
               }}
             >
-              <TextField source="fullName" label="Nom" sx={{ fontWeight: "bold", color: "primary.main" }} />
+              <TextField source="fullName" label="Name" sx={{ fontWeight: "bold", color: "primary.main" }} />
               <TextField source="bio" label="Bio" />
             </Datagrid>
           </ArrayField>

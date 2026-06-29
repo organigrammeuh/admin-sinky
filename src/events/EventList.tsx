@@ -45,10 +45,10 @@ export const EventList = () => (
         }
       }}
     >
-      <TextField source="title" label="Titre" sx={{ fontWeight: "bold", color: "primary.main" }} />
-      <DateField source="startDate" label="Date de début" locales="en-US" />
-      <DateField source="endDate" label="Date de fin" locales="en-US" />
-      <ReferenceField source="idLocation" reference="locations" label="Lieu">
+      <TextField source="title" label="Title" sx={{ fontWeight: "bold", color: "primary.main" }} />
+      <DateField source="startDate" label="Start Date" locales="en-US" />
+      <DateField source="endDate" label="End Date" locales="en-US" />
+      <ReferenceField source="idLocation" reference="locations" label="Location">
         <TextField source="name" />
       </ReferenceField>
       <EditButton color="primary" />
