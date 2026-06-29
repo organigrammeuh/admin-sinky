@@ -17,6 +17,10 @@ import { RoomList } from "./rooms/RoomList";
 import { RoomShow } from "./rooms/RoomShow";
 import { RoomCreate } from "./rooms/RoomCreate";
 import { RoomEdit } from "./rooms/RoomEdit";
+import { LocationList } from "./locations/LocationList";
+import { LocationShow } from "./locations/LocationShow";
+import { LocationCreate } from "./locations/LocationCreate";
+import { LocationEdit } from "./locations/LocationEdit";
 import { darkTheme, lightTheme } from "./theme/theme";
 import authProvider from "./auth/authProvider";
 import { AuthPage } from "./auth/AuthPage";
@@ -93,6 +97,13 @@ export const App = () => (
         edit={RoomEdit}
         list={RoomList}
         show={RoomShow}
+      />
+      <Resource
+        name="locations"
+        create={LocationCreate}
+        edit={LocationEdit}
+        list={LocationList}
+        show={LocationShow}
       />
     </Admin>
   </OAuthHandler>

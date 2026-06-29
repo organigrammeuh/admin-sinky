@@ -1,5 +1,5 @@
-import { ReferenceManyField, Datagrid, Show, SimpleShowLayout, TextField, Link } from "react-admin";
-import { Box, Paper, Typography, Button } from "@mui/material";
+import { ReferenceManyField, Datagrid, Show, SimpleShowLayout, ReferenceField, TextField } from "react-admin";
+import { Box, Paper, Typography } from "@mui/material";
 import { EmptySessions } from "../sessions/SessionNotFound";
 import { ArrowBack } from "@mui/icons-material";
 
@@ -27,6 +27,13 @@ export const RoomShow = () => (
         <Paper sx={{ p: 3 }}>
           <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold", mb: 0.5 }}>NOM DE LA SALLE</Typography>
           <TextField source="name" variant="h4" sx={{ fontWeight: "800", color: "primary.main" }} />
+        </Paper>
+
+        <Paper sx={{ p: 3 }}>
+          <Typography variant="caption" color="textSecondary" sx={{ display: "block", fontWeight: "bold", mb: 0.5 }}>LIEU</Typography>
+          <ReferenceField source="idLocation" reference="locations">
+            <TextField source="name" />
+          </ReferenceField>
         </Paper>
 
         <Paper sx={{ p: 3 }}>
