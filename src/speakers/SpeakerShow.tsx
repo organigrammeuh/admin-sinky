@@ -2,17 +2,34 @@ import {
   ArrayField,
   Datagrid,
   FunctionField,
+  Link,
   Show,
   SimpleShowLayout,
   TextField,
 } from "react-admin";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Button, Paper, Typography } from "@mui/material";
 import { getImageSource } from "./SpeakerList";
 import { EmptySessions } from "../sessions/SessionNotFound";
+import { ArrowBack } from "@mui/icons-material";
+const BackToSpeakerList = () => {
+  return (
+    <Button
+      component={Link}
+      to={`/speakers`}
+      startIcon={<ArrowBack />}
+      variant="outlined"
+      size="small"
+      sx={{ mb: 2 }}
+    >
+      Back to speakers list
+    </Button>
+  );
+};
 
 export const SpeakerShow = () => (
   <Show sx={{ "& .RaShow-card": { background: "transparent", boxShadow: "none" } }}>
     <SimpleShowLayout>
+      <BackToSpeakerList />
       <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: 4, mt: 2, width: "100%" }}>
         
         <Paper sx={{ p: 3, display: "flex", flexDirection: "column", alignItems: "center", minWidth: 250, height: "fit-content" }}>
