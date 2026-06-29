@@ -25,11 +25,6 @@ export const RaMenu = () => {
             leftIcon={<PersonIcon />}
           />
           <Menu.Item
-            to="/sessions"
-            primaryText="Sessions"
-            leftIcon={<ScheduleIcon />}
-          />
-          <Menu.Item
             to="/rooms"
             primaryText="Rooms"
             leftIcon={<MeetingRoomIcon />}
