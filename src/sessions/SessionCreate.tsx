@@ -10,6 +10,7 @@ import {
   minValue,
   ReferenceArrayInput,
   SelectArrayInput,
+  useGetOne,
 } from "react-admin";
 import { useSearchParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
@@ -17,6 +18,9 @@ import { Box, Typography } from "@mui/material";
 export const SessionCreate = () => {
   const [searchParams] = useSearchParams();
   const eventId = searchParams.get("eventId");
+
+  const { data: event } = useGetOne("events", { id: eventId || "" }, { enabled: !!eventId });
+  const eventLocationId = event?.idLocation;
 
   return (
     <Create
@@ -42,7 +46,7 @@ export const SessionCreate = () => {
         <TextInput source="description" validate={[required()]} multiline rows={4} fullWidth sx={{ mb: 2 }} />
         <DateTimeInput source="startTime" validate={[required()]} fullWidth sx={{ mb: 2 }} />
         <DateTimeInput source="endTime" validate={[required()]} fullWidth sx={{ mb: 2 }} />
-        <ReferenceInput source="roomId" reference="rooms">
+        <ReferenceInput source="roomId" reference="rooms" filter={{ idLocation: eventLocationId }}>
           <SelectInput optionText="name" validate={[required()]} label="Room" fullWidth sx={{ mb: 2 }} />
         </ReferenceInput>
         <NumberInput source="capacity" validate={[required(), minValue(1)]} fullWidth sx={{ mb: 2 }} />

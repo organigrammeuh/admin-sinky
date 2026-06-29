@@ -62,7 +62,7 @@ const dataProvider: DataProvider = {
       console.log("avant transform:", json.room, json.speakers);
       json.roomId = json.room?.id;
       json.speakerIds = json.speakers?.map((s: any) => s.id);
-      console.log("après transform:", json.roomId, json.speakerIds);
+      console.log("after transform:", json.roomId, json.speakerIds);
     }
     return { data: json };
   },

@@ -41,7 +41,7 @@ export const SpeakerCreate = () => (
       }}>
         <ImageInput
           source="profilePicture"
-          label="Photo de profil"
+          label="Profile Picture"
           accept={{ "image/*": [] }}
           validate={[required()]}
         >
@@ -50,7 +50,7 @@ export const SpeakerCreate = () => (
       </Box>
 
       <Typography variant="subtitle2" color="textSecondary" sx={{ mb: 1, fontWeight: "bold" }}>
-        Liens de réseaux sociaux
+        Social Media Links
       </Typography>
       <ArrayInput source="socialLinks">
         <SimpleFormIterator sx={{ gap: 1 }}>

@@ -34,7 +34,7 @@ export const SpeakerList = () => (
       }}
     >
 
-      <TextField source="fullName" label="Nom Complet" sx={{ fontWeight: "bold", color: "primary.main" }} />
+      <TextField source="fullName" label="Full Name" sx={{ fontWeight: "bold", color: "primary.main" }} />
       
       <Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end" }}>
         <EditButton color="primary" />

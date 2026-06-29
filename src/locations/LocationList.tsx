@@ -3,30 +3,19 @@ import {
   DeleteButton,
   EditButton,
   List,
-  ReferenceField,
-  ReferenceInput,
-  SelectInput,
   TextInput,
   TextField,
 } from "react-admin";
 import { Box } from "@mui/material";
 
-const roomFilters = [
+const locationFilters = [
   <TextInput source="name" label="Search by name" alwaysOn />,
-  <ReferenceInput source="idLocation" reference="locations" alwaysOn>
-    <SelectInput
-      optionText={(record: any) =>
-        record?.name
-          ? `${record.name} - ${record.city}, ${record.country}`
-          : `${record.city}, ${record.country}`
-      }
-      label="Location"
-    />
-  </ReferenceInput>,
+  <TextInput source="country" label="Search by country" alwaysOn />,
+  <TextInput source="city" label="Search by city" alwaysOn />,
 ];
 
-export const RoomList = () => (
-  <List filters={roomFilters} sx={{ "& .RaList-main": { marginTop: 2 } }}>
+export const LocationList = () => (
+  <List filters={locationFilters} sx={{ "& .RaList-main": { marginTop: 2 } }}>
     <Datagrid 
       rowClick="show" 
       bulkActionButtons={false}
@@ -43,9 +32,8 @@ export const RoomList = () => (
       }}
     >
       <TextField source="name" label="Name" sx={{ fontWeight: "bold", color: "primary.main" }} />
-      <ReferenceField source="idLocation" reference="locations" label="Location">
-        <TextField source="name" />
-      </ReferenceField>
+      <TextField source="country" label="Country" />
+      <TextField source="city" label="City" />
       <Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end" }}>
         <EditButton color="primary" />
         <DeleteButton color="error" />

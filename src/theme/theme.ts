@@ -67,10 +67,16 @@ export const lightTheme = createTheme({
           backgroundColor: "#ffffff",
           color: "#080811",
         },
+      MuiCssBaseline: {
+        styleOverrides: {
+          "::-webkit-scrollbar": {
+            width: "0px",
+          },
+        },
       },
     },
   },
-});
+}});
 
 export const darkTheme = createTheme({
   ...defaultTheme,
@@ -112,7 +118,13 @@ export const darkTheme = createTheme({
           color: "#c16dcc",
           fontWeight: "bold",
         },
+      MuiCssBaseline: {
+        styleOverrides: {
+          "::-webkit-scrollbar": {
+            width: "0px",
+          }
+        },
       },
     },
   },
-});
+}});

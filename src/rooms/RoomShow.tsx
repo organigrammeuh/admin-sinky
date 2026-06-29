@@ -1,5 +1,5 @@
-import { ReferenceManyField, Datagrid, Show, SimpleShowLayout, TextField, Link } from "react-admin";
-import { Box, Paper, Typography, Button } from "@mui/material";
+import { ReferenceManyField, Datagrid, Show, SimpleShowLayout, ReferenceField, TextField } from "react-admin";
+import { Box, Paper, Typography } from "@mui/material";
 import { EmptySessions } from "../sessions/SessionNotFound";
 import { ArrowBack } from "@mui/icons-material";
 

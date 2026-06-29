@@ -5,6 +5,7 @@ import {
   DeleteButton,
   EditButton,
   List,
+  ReferenceField,
   TextInput,
   TextField,
   useRecordContext,
@@ -13,7 +14,7 @@ import { Chip } from "@mui/material";
 
 const eventFilters = [
   <TextInput source="title" label="Search by title" alwaysOn />,
-  <TextInput source="location" label="Search by location" alwaysOn />,
+  <TextInput source="idLocation" label="Search by location ID" alwaysOn />,
   <DateInput source="start_date" label="After" alwaysOn />,
   <DateInput
     alwaysOn

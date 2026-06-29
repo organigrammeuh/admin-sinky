@@ -1,7 +1,9 @@
 import {
   Create,
   DateInput,
+  ReferenceInput,
   required,
+  SelectInput,
   SimpleForm,
   TextInput,
 } from "react-admin";
