@@ -53,6 +53,13 @@ export const lightTheme = createTheme({
                 },
             },
         },
+      MuiCssBaseline: {
+        styleOverrides: {
+          "::-webkit-scrollbar": {
+            width: "0px",
+          },
+        },
+      },
     },
 });
 
@@ -93,5 +100,12 @@ export const darkTheme = createTheme({
                 },
             },
         },
+      MuiCssBaseline: {
+        styleOverrides: {
+          "::-webkit-scrollbar": {
+            width: "0px",
+          }
+        },
+      },
     },
 });
