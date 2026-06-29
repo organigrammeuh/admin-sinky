@@ -42,6 +42,9 @@ export const lightTheme = createTheme({
         primary: { main: "#3b82f6" },
         secondary: { main: "#a855f7" },
     },
+    typography: {
+        fontFamily: '"DM Sans", sans-serif',
+    },
     components: {
         ...commonComponents,
         MuiAppBar: {
@@ -70,6 +73,9 @@ export const darkTheme = createTheme({
             primary: "#f3f4f6",
             secondary: "#9ca3af",
         },
+    },
+    typography: {
+        fontFamily: '"DM Sans", sans-serif',
     },
     components: {
         ...commonComponents,
